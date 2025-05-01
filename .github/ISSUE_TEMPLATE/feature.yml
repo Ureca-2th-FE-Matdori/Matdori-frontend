@@ -1,0 +1,22 @@
+name: "✨ Feature"
+description: "새로운 기능을 제안하거나 개선할 사항이 있나요?"
+labels: ["✨ Feature", "enhancement"]
+body:
+  - type: textarea
+    attributes:
+      label: 📄 기능 개요
+      description: 제안하는 기능의 목적과 필요성을 설명해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔍 상세 설명 및 작업 내용
+      description: 기능의 구체적인 내용과 필요한 작업을 정리해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 📌 추가 참고 사항
+      description: 관련 자료, 참고할 레퍼런스 또는 기타 의견을 남겨 주세요. (선택 사항)
+    validations:
+      required: false

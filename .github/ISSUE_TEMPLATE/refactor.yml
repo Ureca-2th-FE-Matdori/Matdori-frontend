@@ -1,0 +1,26 @@
+name: "🔨 Refactor"
+description: "더 나은 코드 구조로 개선해야 할 부분이 있나요?"
+labels: ["🔨 Refactor", "code-quality", "enhancement"]
+body:
+  - type: textarea
+    attributes:
+      label: 🔍 리팩터링 필요 이유
+      description: 해당 코드를 리팩터링해야 하는 이유를 설명해 주세요. (예: 성능 개선, 유지보수성 향상, 가독성 개선 등)
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔨 리팩터링 대상 및 계획
+      description: 리팩터링할 코드의 위치와 개선 방안을 구체적으로 작성해 주세요.
+      placeholder: |
+        - 대상 파일/모듈:
+        - 개선할 내용:
+        - 예상되는 효과:
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 📌 추가 참고 사항
+      description: 관련된 이슈나 참고할 내용이 있다면 남겨 주세요. (선택 사항)
+    validations:
+      required: false

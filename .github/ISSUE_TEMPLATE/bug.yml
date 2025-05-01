@@ -1,0 +1,38 @@
+name: "🐛 Bug"
+description: "버그가 발생했나요? 예상과 다른 동작을 제보해 주세요."
+labels: ["🐛 Bug", "needs-triage"]
+body:
+  - type: textarea
+    attributes:
+      label: 🐛 버그 설명
+      description: 발견한 버그에 대한 간단한 설명을 작성해 주세요.  
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔄 재현 방법
+      description: 버그를 재현할 수 있는 단계별 절차를 작성해 주세요.
+      placeholder: |
+        1. 어떤 페이지/화면에서 발생했나요?
+        2. 어떤 동작을 수행했나요?
+        3. 예상했던 결과는 무엇인가요?
+        4. 실제로 발생한 결과는 무엇인가요?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 💻 환경 정보
+      description: 발생한 환경(OS, 브라우저, 기기 정보 등)을 작성해 주세요.
+      placeholder: |
+        - OS: (예: Windows 11, macOS 14.1)
+        - 브라우저: (예: Chrome 121.0, Edge 121.1)
+        - 기타 실행 환경(예: Node.js 버전, 라이브러리 버전)
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: 📄 오류 로그
+      description: 관련 로그가 있다면 첨부해 주세요. (없다면 비워도 됩니다.)
+      render: shell
+    validations:
+      required: false
