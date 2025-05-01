@@ -5,7 +5,7 @@ body:
   - type: textarea
     attributes:
       label: 🔍 리팩터링 필요 이유
-      description: 해당 코드를 리팩터링해야 하는 이유를 설명해 주세요. (예: 성능 개선, 유지보수성 향상, 가독성 개선 등)
+      description: "해당 코드를 리팩터링해야 하는 이유를 설명해 주세요. (예: 성능 개선, 유지보수성 향상, 가독성 개선 등)"
     validations:
       required: true
   - type: textarea
