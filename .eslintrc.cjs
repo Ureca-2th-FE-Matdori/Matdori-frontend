@@ -111,7 +111,6 @@ module.exports = {
 		"react/require-default-props": "off",
 		"react/jsx-props-no-spreading": "off",
 		"prettier/prettier": ["error", { endOfLine: "auto" }],
-		"import/no-extraneous-dependencies": ["error"],
 	},
 	settings: {
 		"import/resolver": {
