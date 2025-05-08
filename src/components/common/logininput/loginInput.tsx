@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { inputStyle } from "./loginInput.style";
+import * as styles from "./loginInput.style";
 
-interface loginInputProps {
+interface LoginInputProps {
 	type: "text" | "password";
 	label: string;
 }
 
-const LoginInput = ({ type, label }: loginInputProps) => {
-	const [value, setValue] = useState("");
-
+const LoginInput = ({ type, label }: LoginInputProps) => {
+	const [value, setValue] = useState<string>("");
 	const inputId = label.toLowerCase().replace(/\s+/g, "-");
 
 	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,15 +15,13 @@ const LoginInput = ({ type, label }: loginInputProps) => {
 	};
 
 	return (
-		<div className=" mb-5 flex flex-col items-center justify-center">
-			<label
-				htmlFor={inputId}
-				className=" mb-2 text-body-sm text-text-black self-start">
+		<div className={styles.inputWrapper}>
+			<label htmlFor={inputId} className={styles.labelStyle}>
 				{label}
 			</label>
 			<input
 				id={inputId}
-				className={inputStyle}
+				className={styles.inputStyle}
 				type={type}
 				value={value}
 				onChange={handleChange}
