@@ -85,13 +85,14 @@ const GlobalNavigationBar = () => {
 
 						const visibilityClass = isOpening // visibility에 관한 class (투명도, y축 방향 translate 값 포함)
 							? "opacity-100 translate-y-0"
-							: "opacity-0 translate-y-2";
+							: "opacity-0 translate-y-0";
 
 						return (
 							<a
 								key={item}
 								href={`#${item}`}
-								className={`hover:text-text-brand text-black text-heading-h6 font-extrabold transform transition-all duration-500 ease-out
+								className={`hover:text-text-brand text-black text-heading-h6 font-extrabold transform 
+									transition-opacity duration-500 ease-out
 								${delayClass}
         				${visibilityClass}
 							`}>
