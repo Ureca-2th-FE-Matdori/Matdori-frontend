@@ -1,6 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "@pages/LandingPage/LandingPage";
+
 import VisitHistoryPage from "@pages/VisitHistoryPage/VisitHistoryPage";
+import LoginPage from "@pages/LoginPage/LoginPage";
+import MainPage from "@pages/MainPage/MainPage";
+import SignupPage from "@pages/SignupPage/SignupPage";
+
 import { PATH } from "@constants/path";
 import App from "./App";
 
@@ -17,6 +22,17 @@ const AppRouter = () => {
 				{
 					path: PATH.HISTORY,
 					element: <VisitHistoryPage />,
+        },
+					path: PATH.LOGIN,
+					element: <LoginPage />,
+				},
+				{
+					path: PATH.SIGNUP,
+					element: <SignupPage />,
+				},
+				{
+					path: PATH.MAIN,
+					element: <MainPage />,
 				},
 			],
 		},
