@@ -18,20 +18,26 @@ const LoginPage = () => {
 	const pwref = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
 
-	const handelLoginButtonClick = async () => {
-		setErrorMessage("");
+	const isVaildForm = (): boolean => {
 		// 유효성 검사
 		if (!id.trim()) {
 			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
 			idref.current?.focus();
-			return;
+			return false;
 		}
 
 		if (!pw.trim()) {
 			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
 			pwref.current?.focus();
-			return;
+			return false;
 		}
+
+		return true;
+	};
+
+	const handelLoginButtonClick = async () => {
+		setErrorMessage("");
+		if (!isVaildForm()) return;
 
 		// 로그인 api 통신 처리 //브라우저에서 세션 저장 처리리
 		const result = await postauth({

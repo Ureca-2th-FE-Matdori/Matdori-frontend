@@ -1,5 +1,5 @@
 export const loginPageWrapper =
-	"min-h-screen flex justify-center items-center bg-bg-primary bg-cover bg-center bg-no-repeat overflow-auto";
+	"w-full min-h-screen flex justify-center items-center bg-bg-primary bg-cover bg-center bg-no-repeat overflow-auto";
 export const loginContainer =
 	"min-w-[350px] min-h-[500px] bg-bg-sub p-10 rounded-modal shadow-2 flex flex-col";
 
