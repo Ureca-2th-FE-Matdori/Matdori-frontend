@@ -1,10 +1,10 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "@pages/LandingPage/LandingPage";
 import LoginPage from "@pages/LoginPage/LoginPage";
-import SignupPage from "@pages/SignupPage/SingupPage";
+import MainPage from "@pages/MainPage/MainPage";
+import SignupPage from "@pages/SignupPage/SignupPage";
 import { PATH } from "@constants/path";
 import App from "./App";
-import MainPage from "./pages/MainPage/MainPage";
 
 const AppRouter = () => {
 	const router = createBrowserRouter([
