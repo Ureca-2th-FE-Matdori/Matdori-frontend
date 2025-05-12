@@ -1,31 +1,31 @@
 import axios, { AxiosResponse } from "axios";
 
-interface LoginProps {
+interface authProps {
 	id: string;
 	pw: string;
+	url: string;
 }
 
 interface ApiResponse<T> {
 	content: T | null;
 	message: string | null;
+	url: string;
 }
 
 interface UserResponseDto {
 	userId: string;
 }
 
-export const postLogin = async ({
+export const postauth = async ({
 	id,
 	pw,
-}: LoginProps): Promise<AxiosResponse<ApiResponse<UserResponseDto>> | null> => {
+	url,
+}: authProps): Promise<AxiosResponse<ApiResponse<UserResponseDto>> | null> => {
 	try {
-		const response = await axios.post<ApiResponse<UserResponseDto>>(
-			"http://localhost:8080/ureca/users/login",
-			{
-				user_id: id,
-				password: pw,
-			}
-		);
+		const response = await axios.post<ApiResponse<UserResponseDto>>(url, {
+			user_id: id,
+			password: pw,
+		});
 
 		return response;
 	} catch (error) {
