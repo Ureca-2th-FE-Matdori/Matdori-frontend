@@ -15,7 +15,7 @@ const AppRouter = () => {
 					element: <LandingPage />,
 				},
 				{
-					path: "/visitHistory",
+					path: PATH.HISTORY,
 					element: <VisitHistoryPage />,
 				},
 			],
