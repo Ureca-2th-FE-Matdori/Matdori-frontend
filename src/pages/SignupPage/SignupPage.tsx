@@ -22,19 +22,19 @@ const SignupPage = () => {
 		// 유효성 검사
 		// 아이디 비었을 때 focus
 		if (!id.trim()) {
-			setErrorMessage("아이디와 비빌번호 전부 입력해주세요");
+			setErrorMessage("아이디를 입력해주세요");
 			idref.current?.focus();
 			return false;
 		}
 		// 비번이 비었을 때 focus
 		if (!pw.trim()) {
-			setErrorMessage("아이디와 비빌번호 전부 입력해주세요");
+			setErrorMessage("비빌번호 설정을 입력해주세요");
 			pwref.current?.focus();
 			return false;
 		}
 		// 확인 비번이 비었을 때 focus
 		if (!pwConfirm.trim()) {
-			setErrorMessage("아이디와 비빌번호 전부 입력해주세요");
+			setErrorMessage("비밀번호 확인을 입력해주세요");
 			pwConfirmRef.current?.focus();
 			return false;
 		}
@@ -52,7 +52,7 @@ const SignupPage = () => {
 
 		// 비번과 확인 비번 일치 검사
 		if (pw !== pwConfirm) {
-			setErrorMessage("비밀번호가 일치하지 않습니다.");
+			setErrorMessage("비밀번호와 비밀번호 확인이 일치하지 않습니다.");
 			return false;
 		}
 		return true;
