@@ -2,7 +2,7 @@
 
 // 전체 GNB wrapper 스타일
 export const headerWrapper =
-	"max-w-full mx-auto px-[7vw] h-[10vh] flex justify-between items-center py-12 bg-bg-white"; // 양옆 여백 + 중앙 정렬 + 배경색 흰색
+	"w-full mx-auto px-[7vw] h-[10vh] flex justify-between items-center py-12 bg-bg-white"; // 양옆 여백 + 중앙 정렬 + 배경색 흰색
 
 // 로고 이미지 스타일
 export const logoStyle = "w-auto h-full"; // 가로 비율 유지, 세로 전체 높이 채우기

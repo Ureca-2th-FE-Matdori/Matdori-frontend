@@ -7,7 +7,7 @@ const VisitHistoryPage = () => {
 	const isMobile = useIsMobile(); // 현재 화면이 모바일인지 아닌지 확인하는 boolean 값 가져오기
 
 	return (
-		<div className="w-full flex flex-col justify-start items-center px-[5vw] pt-[5vh] md:px-[12vw] md:pt-[7vh]">
+		<div className="bg-bg-secondary w-full h-full flex flex-col justify-start items-center px-[5vw] pt-[5vh] md:px-[12vw] md:pt-[7vh]">
 			{/* 방문 내역 페이지 상단의 제목 */}
 			<span className="text-text-secondary text-heading-h3 md:text-heading-h1 pb-[5vh]">
 				기처리님의 방문내역
