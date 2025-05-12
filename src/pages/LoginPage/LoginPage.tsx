@@ -21,13 +21,13 @@ const LoginPage = () => {
 	const isVaildForm = (): boolean => {
 		// 유효성 검사
 		if (!id.trim()) {
-			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
+			setErrorMessage("아이디를 입력해주세요.");
 			idref.current?.focus();
 			return false;
 		}
 
 		if (!pw.trim()) {
-			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
+			setErrorMessage("비밀번호를 입력해주세요.");
 			pwref.current?.focus();
 			return false;
 		}
