@@ -88,14 +88,8 @@ const LandingPage = () => {
 							<Button
 								label="시작 하기"
 								size="sm"
-								onClick={() => navigate(PATH.SIGNUP)}
+								onClick={() => navigate(PATH.LOGIN)}
 							/>
-						</div>
-						<div className={styles.loginWrapper}>
-							<p className={styles.loginText}>계정이 있으신가요?</p>
-							<a className={styles.loginLink} href={PATH.LOGIN}>
-								로그인하기
-							</a>
 						</div>
 					</div>
 				</motion.div>

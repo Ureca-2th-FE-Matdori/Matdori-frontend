@@ -35,15 +35,6 @@ export const logoText =
 
 export const descriptionText = "text-lg text-text-black font-bold";
 
-export const buttonContainer =
-	"flex flex-col p-[var(--spacing-28)] gap-[var(--spacing-4)]";
+export const buttonContainer = "flex flex-col p-[var(--spacing-28)]";
 
 export const buttonWrapper = "h-48";
-
-export const loginWrapper =
-	"flex justify-center items-center gap-[var(--spacing-12)]";
-
-export const loginText = "text-body-md font-bold";
-
-export const loginLink =
-	"text-body-md font-bold text-text-info hover:text-text-brand";
