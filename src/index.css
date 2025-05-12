@@ -53,7 +53,7 @@
 	--spacing-96: 96px;
 	--spacing-100: 100px;
 
-	--text-heading-logo: 250px;
+	--text-heading-logo: 150px;
 	--text-heading-h1: 48px;
 	--text-heading-h2: 44px;
 	--text-heading-h3: 40px;
@@ -80,16 +80,23 @@
 }
 
 @font-face {
-	font-family: "CookieRun-Regular";
+	font-family: "CookieRun";
 	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff")
 		format("woff");
-	font-weight: normal;
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "CookieRun";
+	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2101@1.0/CookieRun-Bold.woff")
+		format("woff");
+	font-weight: 700;
 	font-style: normal;
 }
 
 :root {
-	font-family:
-		"CookieRun-Regular", system-ui, Avenir, Helvetica, Arial, sans-serif;
+	font-family: "CookieRun", system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
 
