@@ -1,13 +1,22 @@
+import { useMediaQuery } from "react-responsive";
 import { Outlet } from "react-router-dom";
+
 import "./App.css";
+import GlobalNavigationBar from "@components/common/GlobalNavigationBar/GlobalNavigationBar";
+import { IsMobileContext } from "./stores/IsMobileContext";
 
 function App() {
+	const isMobile = useMediaQuery({ query: "(max-width: 767px)" }); // Mobile 화면 여부 확인
+
 	return (
-		<div className="w-100 h-100 bg-bg-primary rounded-input p-12 text-heading-h7 shadow-4">
-			<main>
-				<Outlet />
-			</main>
-		</div>
+		<IsMobileContext.Provider value={isMobile}>
+			<div className="w-full h-full bg-bg-secondary text-heading-h7">
+				<GlobalNavigationBar />
+				<main>
+					<Outlet />
+				</main>
+			</div>
+		</IsMobileContext.Provider>
 	);
 }
 

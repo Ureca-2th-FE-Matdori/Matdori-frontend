@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "@pages/LandingPage/LandingPage";
+import VisitHistoryPage from "@pages/VisitHistoryPage/VisitHistoryPage";
 import { PATH } from "@constants/path";
 import App from "./App";
 
@@ -12,6 +13,10 @@ const AppRouter = () => {
 				{
 					path: "",
 					element: <LandingPage />,
+				},
+				{
+					path: "/visitHistory",
+					element: <VisitHistoryPage />,
 				},
 			],
 		},
