@@ -1,12 +1,22 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import "./App.css";
+import { setUserId } from "./stores/userSlice";
 
 function App() {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const storeId = sessionStorage.getItem("userId");
+		if (storeId) {
+			dispatch(setUserId(storeId));
+		}
+	}, []);
+
 	return (
-		<div className="w-full h-full bg-bg-sub rounded-input p-12 text-heading-h7 shadow-4">
-			<main>
-				<Outlet />
-			</main>
+		<div>
+			<Outlet />
 		</div>
 	);
 }
