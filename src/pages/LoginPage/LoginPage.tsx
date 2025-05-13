@@ -47,7 +47,7 @@ const LoginPage = () => {
 			dispatch(setUserId(response.userId));
 			nav(PATH.MAIN);
 		} catch (error) {
-			setErrorMessage("로그인에 실패했습니다");
+			setErrorMessage("아이디 또는 비밀번호가 잘못 되었습니다.");
 		}
 	};
 
