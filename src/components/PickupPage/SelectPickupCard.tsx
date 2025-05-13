@@ -1,7 +1,7 @@
+import Button from "@components/common/Button/Button";
 import Lottie from "lottie-react";
 import { useIsMobile } from "@stores/IsMobileContext";
 import * as styles from "./SelectPickupCard.style";
-import Button from "../common/Button/Button";
 
 interface SelectPickupCardProps {
 	title: string;
@@ -17,6 +17,7 @@ const SelectPickupCard = ({
 	buttonlabel,
 }: SelectPickupCardProps) => {
 	const isMobile = useIsMobile();
+
 	return (
 		<div className={styles.pickupCardContainer}>
 			<div className={styles.pickupCardTitle}>{title}</div>
