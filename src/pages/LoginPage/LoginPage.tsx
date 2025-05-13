@@ -52,7 +52,7 @@ const LoginPage = () => {
 			console.log("서버 응답", result);
 			sessionStorage.setItem("userId", result.data.content.userId);
 			dispatch(setUserId(result?.data.content.userId));
-			nav(PATH.MAIN);
+			nav(PATH.PICKUP);
 		} else {
 			console.log("요청 실패", result);
 			setErrorMessage(result?.data?.message || "로그인에 실패했습니다");

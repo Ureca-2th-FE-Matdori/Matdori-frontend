@@ -20,7 +20,7 @@ export const mobileButton = "md:hidden focus:outline-none cursor-pointer"; // md
 
 // 모바일 드롭다운 전체 wrapper 스타일 (열림/닫힘 상태에 따라 동적 처리)
 export const mobileDropdownWrapper = (state: "opening" | "closing" | null) =>
-	`md:hidden overflow-hidden flex flex-col justify-between items-center gap-5 
+	`md:hidden flex flex-col justify-between items-center gap-5 
    transition-all duration-500 ease-in-out bg-bg-white/50 px-[7vw] 
    ${
 			state === "opening"
