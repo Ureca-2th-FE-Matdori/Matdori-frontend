@@ -42,7 +42,7 @@ const LoginPage = () => {
 
 		try {
 			const response = await postLogin({ id, pw });
-
+      
 			sessionStorage.setItem("userId", response.userId);
 			dispatch(setUserId(response.userId));
 			nav(PATH.MAIN);

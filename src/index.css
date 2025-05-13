@@ -80,28 +80,24 @@
 }
 
 @font-face {
-	font-family: "CookieRun";
+	font-family: "CookieRun-Regular";
 	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff")
 		format("woff");
-	font-weight: 400;
+	font-weight: normal;
 	font-style: normal;
 }
-
 @font-face {
-	font-family: "CookieRun";
-	src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2101@1.0/CookieRun-Bold.woff")
+	font-family: "CookieRun-Regular";
+	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff")
 		format("woff");
-	font-weight: 700;
+	font-weight: bold;
 	font-style: normal;
 }
-
 :root {
 	font-family: "CookieRun", system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
 	font-weight: 400;
-
 	color-scheme: light dark;
-
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
