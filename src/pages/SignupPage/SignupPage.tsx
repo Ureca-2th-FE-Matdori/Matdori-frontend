@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import postSignUp from "@apis/user/postSignup";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
-import { postauth } from "@apis/authHttp";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./SignupPage.style";
@@ -22,19 +22,19 @@ const SignupPage = () => {
 		// 유효성 검사
 		// 아이디 비었을 때 focus
 		if (!id.trim()) {
-			setErrorMessage("아이디를 입력해주세요");
+			setErrorMessage("아이디를 입력해주세요.");
 			idref.current?.focus();
 			return false;
 		}
 		// 비번이 비었을 때 focus
 		if (!pw.trim()) {
-			setErrorMessage("비빌번호 설정을 입력해주세요");
+			setErrorMessage("비빌번호 설정을 입력해주세요.");
 			pwref.current?.focus();
 			return false;
 		}
 		// 확인 비번이 비었을 때 focus
 		if (!pwConfirm.trim()) {
-			setErrorMessage("비밀번호 확인을 입력해주세요");
+			setErrorMessage("비밀번호 확인을 입력해주세요.");
 			pwConfirmRef.current?.focus();
 			return false;
 		}
@@ -62,20 +62,13 @@ const SignupPage = () => {
 		setErrorMessage("");
 		if (!isVaildForm()) return;
 
-		// 회원 가입 진행
-		const result = await postauth({
-			id,
-			pw,
-			url: "http://localhost:8080/ureca/users/createAccount",
-		});
+		try {
+			await postSignUp({ id, pw });
 
-		if (result?.status === 200) {
-			console.log("서버 응답", result);
 			alert("회원가입 성공하였습니다.");
 			nav(PATH.LOGIN);
-		} else {
-			console.log("요청 실패", result);
-			setErrorMessage(result?.data?.message || "로그인에 실패했습니다");
+		} catch (error) {
+			setErrorMessage("이미 존재하는 아이디입니다.");
 		}
 	};
 
