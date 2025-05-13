@@ -1,7 +1,7 @@
 export const loginPageWrapper =
 	"w-full min-h-screen flex justify-center items-center bg-bg-primary bg-cover bg-center bg-no-repeat overflow-auto";
 export const loginContainer =
-	"min-w-[350px] min-h-[500px] bg-bg-sub p-10 rounded-modal shadow-2 flex flex-col";
+	"w-[350px] h-[500px] bg-bg-sub p-10 rounded-modal shadow-2 flex flex-col";
 
 export const loginTitle = "text-heading-h5 py-8";
 

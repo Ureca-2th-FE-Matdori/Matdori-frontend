@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import postLogin from "@apis/user/postLogin";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
 import { setUserId } from "@stores/userSlice";
-import { postauth } from "@apis/authHttp";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./LoginPage.style";
@@ -37,25 +37,17 @@ const LoginPage = () => {
 
 	const handelLoginButtonClick = async () => {
 		setErrorMessage("");
+
 		if (!isVaildForm()) return;
 
-		// 로그인 api 통신 처리 //브라우저에서 세션 저장 처리리
-		const result = await postauth({
-			id,
-			pw,
-			url: "http://localhost:8080/ureca/users/login",
-		});
-
-		console.log(result);
-
-		if (result?.status === 200 && result.data.content) {
-			console.log("서버 응답", result);
-			sessionStorage.setItem("userId", result.data.content.userId);
-			dispatch(setUserId(result?.data.content.userId));
-			nav(PATH.PICKUP);
-		} else {
-			console.log("요청 실패", result);
-			setErrorMessage(result?.data?.message || "로그인에 실패했습니다");
+		try {
+			const response = await postLogin({ id, pw });
+      
+			sessionStorage.setItem("userId", response.userId);
+			dispatch(setUserId(response.userId));
+			nav(PATH.MAIN);
+		} catch (error) {
+			setErrorMessage("아이디 또는 비밀번호가 잘못 되었습니다.");
 		}
 	};
 
