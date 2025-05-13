@@ -22,10 +22,14 @@ export const postauth = async ({
 	url,
 }: authProps): Promise<AxiosResponse<ApiResponse<UserResponseDto>> | null> => {
 	try {
-		const response = await axios.post<ApiResponse<UserResponseDto>>(url, {
-			user_id: id,
-			password: pw,
-		});
+		const response = await axios.post<ApiResponse<UserResponseDto>>(
+			url,
+			{
+				user_id: id,
+				password: pw,
+			},
+			{ withCredentials: true }
+		);
 
 		return response;
 	} catch (error) {

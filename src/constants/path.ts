@@ -3,5 +3,5 @@ export const PATH = {
 	HISTORY: "/visitHistory",
 	LOGIN: "/login",
 	SIGNUP: "/signup",
-	MAIN: "/main",
+	PICKUP: "/pickup",
 } as const;
