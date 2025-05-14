@@ -3,6 +3,7 @@ import LandingPage from "@pages/LandingPage/LandingPage";
 
 import LoginPage from "@pages/LoginPage/LoginPage";
 import MainPage from "@pages/MainPage/MainPage";
+import RankingPage from "@pages/RankingPage/RankingPage";
 import SignupPage from "@pages/SignupPage/SignupPage";
 import VisitHistoryPage from "@pages/VisitHistoryPage/VisitHistoryPage";
 
@@ -34,6 +35,10 @@ const AppRouter = () => {
 				{
 					path: PATH.MAIN,
 					element: <MainPage />,
+				},
+				{
+					path: PATH.RANKING,
+					element: <RankingPage />,
 				},
 			],
 		},
