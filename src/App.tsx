@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Outlet, useLocation } from "react-router-dom";
 import GlobalNavigationBar from "@components/common/GlobalNavigationBar/GlobalNavigationBar";
+import ToastContainer from "@components/common/ToastContainer/ToastContainer";
 import { setUserId } from "@stores/slices/userSlice";
 import { IsMobileContext } from "@stores/IsMobileContext";
 import { PATH } from "@constants/path";
@@ -25,11 +26,12 @@ function App() {
 
 	return (
 		<IsMobileContext.Provider value={isMobile}>
-			<div className="w-full h-full flex flex-col">
+			<div className="w-full h-full flex flex-col justify-center items-center">
 				{isNavigationBarVisible && <GlobalNavigationBar />}
 				<main>
 					<Outlet />
 				</main>
+				<ToastContainer />
 			</div>
 		</IsMobileContext.Provider>
 	);
