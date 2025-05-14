@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import postLogin from "@apis/user/postLogin";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
-import { setUserId } from "@stores/userSlice";
+import { setUserId } from "@stores/slices/userSlice";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./LoginPage.style";
@@ -42,10 +42,10 @@ const LoginPage = () => {
 
 		try {
 			const response = await postLogin({ id, pw });
-      
+
 			sessionStorage.setItem("userId", response.userId);
 			dispatch(setUserId(response.userId));
-			nav(PATH.MAIN);
+			nav(PATH.PICKUP);
 		} catch (error) {
 			setErrorMessage("아이디 또는 비밀번호가 잘못 되었습니다.");
 		}

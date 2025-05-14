@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 import { Outlet, useLocation } from "react-router-dom";
 import GlobalNavigationBar from "@components/common/GlobalNavigationBar/GlobalNavigationBar";
+import { setUserId } from "@stores/slices/userSlice";
 import { IsMobileContext } from "@stores/IsMobileContext";
-import { setUserId } from "@stores/userSlice";
 import { PATH } from "@constants/path";
 import "./App.css";
 
@@ -15,12 +15,14 @@ function App() {
 	const isNavigationBarVisible = [PATH.PICKUP, PATH.HISTORY].some((path) =>
 		location.pathname.includes(path)
 	);
+
 	useEffect(() => {
 		const storeId = sessionStorage.getItem("userId");
 		if (storeId) {
 			dispatch(setUserId(storeId));
 		}
 	}, []);
+
 	return (
 		<IsMobileContext.Provider value={isMobile}>
 			<div className="w-full h-full flex flex-col">
