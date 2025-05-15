@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
+import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import * as styles from "@components/VisitHistory/HistoryCardDesktop.style";
 
-import NaverDynamicMap from "@components/VisitHistory/NaverDynamicMap";
 import downArrowIcon from "@assets/down-arrow.svg";
 // import mapPreviewImg from "@assets/map-preview.png";
 import matdoriLogo from "@assets/matdori-logo.svg";

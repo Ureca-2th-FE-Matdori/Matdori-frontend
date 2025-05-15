@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
+import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
+
 import * as styles from "@components/VisitHistory/HistoryCardMobile.style";
-import NaverDynamicMap from "@components/VisitHistory/NaverDynamicMap";
 import downArrowIcon from "@assets/down-arrow.svg";
 
 const HistoryCardMobile = () => {
