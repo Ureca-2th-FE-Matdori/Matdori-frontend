@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import postSignUp from "@apis/user/postSignup";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
+import useToast from "@hooks/useToast";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./SignupPage.style";
@@ -13,6 +14,7 @@ const SignupPage = () => {
 	const [pw, setPW] = useState<string>("");
 	const [errorMessage, setErrorMessage] = useState<string>("");
 	const [pwConfirm, setPwconfirm] = useState<string>("");
+	const { makeToast } = useToast();
 
 	const idref = useRef<HTMLInputElement>(null);
 	const pwref = useRef<HTMLInputElement>(null);
@@ -65,7 +67,7 @@ const SignupPage = () => {
 		try {
 			await postSignUp({ id, pw });
 
-			alert("회원가입 성공하였습니다.");
+			makeToast("Success", "회원가입이 완료되었습니다.");
 			nav(PATH.LOGIN);
 		} catch (error) {
 			setErrorMessage("이미 존재하는 아이디입니다.");
