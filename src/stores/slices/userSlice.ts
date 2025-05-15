@@ -17,6 +17,7 @@ const userSlice = createSlice({
 	reducers: {
 		// userId 저장
 		setUserId: (state, action: PayloadAction<string>) => {
+			/* eslint-disable no-param-reassign */
 			state.userId = action.payload;
 		},
 		// userId 초기화

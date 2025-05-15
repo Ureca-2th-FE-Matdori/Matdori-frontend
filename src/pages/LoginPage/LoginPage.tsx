@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import postLogin from "@apis/user/postLogin";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
-import { setUserId } from "@stores/userSlice";
-import { postauth } from "@apis/authHttp";
+import { setUserId } from "@stores/slices/userSlice";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./LoginPage.style";
@@ -18,38 +18,36 @@ const LoginPage = () => {
 	const pwref = useRef<HTMLInputElement>(null);
 	const dispatch = useDispatch();
 
-	const handelLoginButtonClick = async () => {
-		setErrorMessage("");
+	const isVaildForm = (): boolean => {
 		// 유효성 검사
 		if (!id.trim()) {
-			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
+			setErrorMessage("아이디를 입력해주세요.");
 			idref.current?.focus();
-			return;
+			return false;
 		}
 
 		if (!pw.trim()) {
-			setErrorMessage("아이디와 비밀번호를 모두 입력해주세요.");
+			setErrorMessage("비밀번호를 입력해주세요.");
 			pwref.current?.focus();
-			return;
+			return false;
 		}
 
-		// 로그인 api 통신 처리 //브라우저에서 세션 저장 처리리
-		const result = await postauth({
-			id,
-			pw,
-			url: "http://localhost:8080/ureca/users/login",
-		});
+		return true;
+	};
 
-		console.log(result);
+	const handelLoginButtonClick = async () => {
+		setErrorMessage("");
 
-		if (result?.status === 200 && result.data.content) {
-			console.log("서버 응답", result);
-			sessionStorage.setItem("userId", result.data.content.userId);
-			dispatch(setUserId(result?.data.content.userId));
-			nav(PATH.MAIN);
-		} else {
-			console.log("요청 실패", result);
-			setErrorMessage(result?.data?.message || "로그인에 실패했습니다");
+		if (!isVaildForm()) return;
+
+		try {
+			const response = await postLogin({ id, pw });
+
+			sessionStorage.setItem("userId", response.userId);
+			dispatch(setUserId(response.userId));
+			nav(PATH.PICKUP);
+		} catch (error) {
+			setErrorMessage("아이디 또는 비밀번호가 잘못 되었습니다.");
 		}
 	};
 

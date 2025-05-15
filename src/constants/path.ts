@@ -5,4 +5,5 @@ export const PATH = {
 	SIGNUP: "/signup",
 	MAIN: "/main",
 	RANKING: "/ranking",
+	PICKUP: "/pickup",
 } as const;
