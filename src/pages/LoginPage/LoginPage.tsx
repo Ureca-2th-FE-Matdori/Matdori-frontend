@@ -42,10 +42,10 @@ const LoginPage = () => {
 
 		try {
 			const response = await postLogin({ id, pw });
-      
+
 			sessionStorage.setItem("userId", response.userId);
 			dispatch(setUserId(response.userId));
-			nav(PATH.MAIN);
+			nav(PATH.PICKUP);
 		} catch (error) {
 			setErrorMessage("아이디 또는 비밀번호가 잘못 되었습니다.");
 		}

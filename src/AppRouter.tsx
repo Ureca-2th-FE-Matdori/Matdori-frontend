@@ -3,6 +3,7 @@ import LandingPage from "@pages/LandingPage/LandingPage";
 
 import LoginPage from "@pages/LoginPage/LoginPage";
 import PickupPage from "@pages/PickupPage/PickupPage";
+import PickupResultPage from "@pages/PickupResultPage/PickupResultPage";
 import SignupPage from "@pages/SignupPage/SignupPage";
 import VisitHistoryPage from "@pages/VisitHistoryPage/VisitHistoryPage";
 
@@ -34,6 +35,10 @@ const AppRouter = () => {
 				{
 					path: PATH.PICKUP,
 					element: <PickupPage />,
+				},
+				{
+					path: PATH.RESULT,
+					element: <PickupResultPage />,
 				},
 			],
 		},
