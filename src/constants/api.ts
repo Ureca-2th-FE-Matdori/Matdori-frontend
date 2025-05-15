@@ -5,4 +5,5 @@ export const NETWORK_TIMEOUT = 30000;
 export const END_POINT = {
 	LOGIN: "users/login",
 	SIGNUP: "/users/createAccount",
+	TOP10: "/ranking/top10",
 };
