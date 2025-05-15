@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import postHistory from "@apis/history/postHistory";
+import fireworks1 from "@assets/json/fireworks1.json";
 import Button from "@components/common/Button/Button";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import ResultInfoBox from "@components/PickupResultPage/ResultInfoBox";
@@ -9,7 +10,6 @@ import Lottie from "lottie-react";
 import { RootState } from "@stores/index";
 import { useIsMobile } from "@stores/IsMobileContext";
 import { PATH } from "@constants/path";
-import fireworks1 from "@assets/fireworks1.json";
 import * as styles from "./PickupResultPage.style";
 
 // 추후 mockData 제외 후 api 불러와서 처리

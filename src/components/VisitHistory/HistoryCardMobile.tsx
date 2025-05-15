@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-
+import downArrowIcon from "@assets/svg/down-arrow.svg";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
-
 import * as styles from "@components/VisitHistory/HistoryCardMobile.style";
-import downArrowIcon from "@assets/down-arrow.svg";
 
 const HistoryCardMobile = () => {
 	const [isOpen, setIsOpen] = useState(false); // 확장 섹션의 존재 여부(드롭다운 열림/닫힘)

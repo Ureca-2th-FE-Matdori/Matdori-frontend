@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import downArrowIcon from "@assets/svg/down-arrow.svg";
+// import mapPreviewImg from "@assets/png/map-preview.png";
+import matdoriLogo from "@assets/svg/matdori-logo.svg";
 
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import * as styles from "@components/VisitHistory/HistoryCardDesktop.style";
-
-import downArrowIcon from "@assets/down-arrow.svg";
-// import mapPreviewImg from "@assets/map-preview.png";
-import matdoriLogo from "@assets/matdori-logo.svg";
 
 const HistoryCardDesktop = () => {
 	const [isOpen, setIsOpen] = useState(false); // 확장 섹션의 존재 여부(드롭다운 열림/닫힘)
