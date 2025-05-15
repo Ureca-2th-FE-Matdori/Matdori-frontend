@@ -12,8 +12,8 @@ import * as styles from "./NameCard.style";
 // 흰색 배너 컨테이너에서 사용할 Props type 정의
 type NameCardProps = {
 	rank: number;
-	name: string;
-	points: number;
+	userId: string;
+	point: number;
 	maxPoints: number;
 	delay: number;
 };
@@ -26,14 +26,14 @@ const getMedalIcon = (rank: number) => {
 	return thirdMedalIcon;
 };
 
-const NameCard = ({ rank, name, points, maxPoints, delay }: NameCardProps) => {
+const NameCard = ({ rank, userId, point, maxPoints, delay }: NameCardProps) => {
 	const isMobile = useIsMobile(); // 현재 화면이 모바일인지 아닌지 확인하는 boolean 값 가져오기
 
 	const [barWidth, setBarWidth] = useState("0%"); // 막대 그래프의 초기 상태는 0%로 초기화
 
 	// react에서 제공하는 useLayoutEffect()를 통해 초기상태를 먼저 렌더, 그 다음 프레임에 변경 되도록 설정 가능
 	useLayoutEffect(() => {
-		const ratio = (points / maxPoints) * 100;
+		const ratio = (point / maxPoints) * 100;
 
 		// 1. 첫 렌더링 시에 '0px'을 DOM에 그리도록 강제 시킨다
 		setBarWidth("0%");
@@ -44,7 +44,7 @@ const NameCard = ({ rank, name, points, maxPoints, delay }: NameCardProps) => {
 				setBarWidth(`${ratio}%`);
 			}, delay * 1000); // ms 단위로 지연
 		});
-	}, [points, maxPoints, delay]);
+	}, [point, maxPoints, delay]);
 
 	return (
 		<div className={styles.wrapperStyle}>
@@ -58,7 +58,7 @@ const NameCard = ({ rank, name, points, maxPoints, delay }: NameCardProps) => {
 						<span className="text-body-lg text-gray-600">{rank}</span>
 					</div>
 					<img src={matdoriLogo} className="w-48 h-full" alt="맛도리로고" />
-					<span className={styles.nameTextStyle}>{name}</span>
+					<span className={styles.nameTextStyle}>{userId}</span>
 				</div>
 
 				{/* 등수 뱃지 (1,2,3등에게 부여) */}
@@ -83,7 +83,7 @@ const NameCard = ({ rank, name, points, maxPoints, delay }: NameCardProps) => {
 					<span
 						className={styles.pointTextStyle}
 						style={{ animationDelay: `${delay + 0.5}s` }}>
-						{points}points
+						{point}points
 					</span>
 				</div>
 			)}
