@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import postLogin from "@apis/user/postLogin";
 import Button from "@components/common/Button/Button";
 import LoginInput from "@components/common/logininput/loginInput";
-import { setUserId } from "@stores/userSlice";
+import { setUserId } from "@stores/slices/userSlice";
 import { PATH } from "@constants/path";
 import loginBackground from "@assets/loginBackground.png";
 import * as styles from "./LoginPage.style";

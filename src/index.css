@@ -79,6 +79,40 @@
 	--shadow-4: 0 0 1px rgba(0, 0, 0, 0.25), 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+@keyframes slideUp {
+	0% {
+		transform: translate3d(0, 100%, 0);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+	}
+
+	100% {
+		transform: translate3d(0, 100%, 0);
+		opacity: 0;
+	}
+}
+
+.animate-slide-up {
+	animation: slideUp 0.4s ease-out forwards;
+	will-change: transform, opacity;
+}
+
+.animate-slide-down {
+	animation: slideDown 0.4s ease-out forwards;
+	will-change: transform, opacity;
+}
+
 @font-face {
 	font-family: "CookieRun-Regular";
 	src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/CookieRun-Regular.woff")
@@ -93,6 +127,27 @@
 	font-weight: bold;
 	font-style: normal;
 }
+
+@layer utilities {
+	/* 1. Fade In */
+	@keyframes fade-in {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	.animate-fade-in {
+		animation-name: fade-in;
+		animation-duration: 0.5s;
+		animation-timing-function: ease-out;
+		animation-fill-mode: forwards;
+	}
+}
+
+
 :root {
 	font-family: "CookieRun", system-ui, Avenir, Helvetica, Arial, sans-serif;
 	line-height: 1.5;
@@ -107,7 +162,7 @@
 body {
 	display: flex;
 	margin: 0;
-	height: 100vh;
+	min-height: 100vh;
 	width: 100vw;
 }
 

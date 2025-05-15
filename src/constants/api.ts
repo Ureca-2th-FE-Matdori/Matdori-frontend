@@ -6,4 +6,5 @@ export const END_POINT = {
 	LOGIN: "users/login",
 	SIGNUP: "users/createAccount",
 	HISTORY: "select/finalize",
+	TOP10: "/ranking/top10",
 };

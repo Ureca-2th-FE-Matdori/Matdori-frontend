@@ -2,6 +2,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LandingPage from "@pages/LandingPage/LandingPage";
 
 import LoginPage from "@pages/LoginPage/LoginPage";
+import MainPage from "@pages/MainPage/MainPage";
+import RankingPage from "@pages/RankingPage/RankingPage";
 import PickupPage from "@pages/PickupPage/PickupPage";
 import PickupResultPage from "@pages/PickupResultPage/PickupResultPage";
 import SignupPage from "@pages/SignupPage/SignupPage";
@@ -39,6 +41,10 @@ const AppRouter = () => {
 				{
 					path: PATH.RESULT,
 					element: <PickupResultPage />,
+        },
+        {
+					path: PATH.RANKING,
+					element: <RankingPage />,
 				},
 			],
 		},
