@@ -4,5 +4,6 @@ export const NETWORK_TIMEOUT = 30000;
 
 export const END_POINT = {
 	LOGIN: "users/login",
-	SIGNUP: "/users/createAccount",
+	SIGNUP: "users/createAccount",
+	HISTORY: "select/finalize",
 };
