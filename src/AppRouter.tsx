@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import CategoryPage from "@pages/CategoryPage/CategoryPage";
 import LandingPage from "@pages/LandingPage/LandingPage";
 import LoginPage from "@pages/LoginPage/LoginPage";
 import PickupPage from "@pages/PickupPage/PickupPage";
@@ -42,6 +43,10 @@ const AppRouter = () => {
 				{
 					path: PATH.RANKING,
 					element: <RankingPage />,
+				},
+				{
+					path: PATH.CATEGORY,
+					element: <CategoryPage />,
 				},
 			],
 		},
