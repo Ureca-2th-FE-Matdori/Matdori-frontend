@@ -81,7 +81,9 @@ const PickupResultPage = ({ mode }: pickupPageProps) => {
 		useState<Restaurant[]>(mockData);
 
 	const isMobile = useIsMobile();
-	const userId = useSelector((state: RootState) => state.user.userId);
+	const userId = useSelector(
+		(state: RootState) => state.rootReducer.user.userId
+	);
 	const nav = useNavigate();
 
 	const lat = parseFloat(selectedRestaurant.mapy) / 1e7;
