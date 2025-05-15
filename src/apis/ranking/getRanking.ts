@@ -12,7 +12,7 @@ interface rankedUser extends rawUserType {
 }
 
 // 포인트 상위 10명을 보여주는 메소드 showRanking
-export const showRanking = async (): Promise<rankedUser[]> => {
+export const getRanking = async (): Promise<rankedUser[]> => {
 	const response = await axiosInstance.get(`${END_POINT.TOP10}`);
 
 	// 동순위 처리를 위해 필요한 변수

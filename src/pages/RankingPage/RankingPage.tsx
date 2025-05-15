@@ -1,6 +1,6 @@
 // 회원들을 포인트에 따라 Top10 랭킹을 표시하는 RankingPage
 import { useEffect, useState } from "react";
-import { showRanking } from "@apis/ranking/showRanking";
+import { getRanking } from "@apis/ranking/getRanking";
 
 import NameCard from "@components/RankingPage/NameCard";
 import * as styles from "./RankingPage.style"; // 관련 스타일 내용들 import
@@ -15,17 +15,17 @@ const RankingPage = () => {
 	const [users, setUsers] = useState<userType[]>([]); // 유저들의 정보를 포함하고 있는 users state
 	const [maxPoints, setMaxPoints] = useState(0); // points 최댓값 저장하는 maxPoints
 
+	const fetchTopTen = async () => {
+		try {
+			const result = await getRanking(); // Top10 유저 정보를 가져오는 API 호출
+			setUsers(result); // 지역 상태에 저장
+		} catch (error) {
+			console.error("랭킹 데이터를 불러오지 못함.", error);
+		}
+	};
+
 	// RankingPage가 최초 렌더링 될 때에만 값 변경
 	useEffect(() => {
-		const fetchTopTen = async () => {
-			try {
-				const result = await showRanking(); // Top10 유저 정보를 가져오는 API 호출
-				setUsers(result); // 지역 상태에 저장
-			} catch (error) {
-				console.error("랭킹 데이터를 불러오지 못함.", error);
-			}
-		};
-
 		fetchTopTen(); // 화면 최초 렌더링 시 1회만 호출
 	}, []);
 
