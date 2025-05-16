@@ -1,10 +1,12 @@
 // 네이버 geocoding api를 이용해서 도로명 주소에서 위도/경도 값을 추출
+
 const getLatLngFromAddress = async (
 	address: string
 ): Promise<{ lat: number; lng: number }> => {
 	return new Promise((resolve, reject) => {
 		if (!window.naver || !window.naver.maps) {
-			console.log("Naver Maps JS SDK가 로드되지 않았습니다.");
+			// 토스트 메시지 생성
+			console.error("네이버 지도가 제대로 로드되지 않았습니다");
 			reject(new Error("Naver Maps SDK not loaded"));
 			return;
 		}

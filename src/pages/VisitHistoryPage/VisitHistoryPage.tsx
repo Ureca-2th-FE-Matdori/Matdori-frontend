@@ -29,8 +29,10 @@ const VisitHistoryPage = () => {
 
 	// userId를 불러왔을 때에만 historyData 로딩
 	useEffect(() => {
-		if (!userId) return; // userId가 없다면.. return
-		fetchHistoryData();
+		if (userId) {
+			// userId가 있는 경우에만 historyData를 fetch
+			fetchHistoryData();
+		}
 	}, [userId]);
 
 	return (

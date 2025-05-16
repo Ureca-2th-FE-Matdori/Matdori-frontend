@@ -8,7 +8,14 @@ import downArrowIcon from "@assets/down-arrow.svg";
 // import mapPreviewImg from "@assets/map-preview.png";
 import matdoriLogo from "@assets/matdori-logo.svg";
 
-import { historyCardProps } from "../../types/HistoryCardProps";
+export interface historyCardProps {
+	// historyId: number;
+	// rate: number;
+	url?: string | null;
+	title: string;
+	roadAddress: string;
+	categoryName: string;
+}
 
 const HistoryCardDesktop = ({
 	url,

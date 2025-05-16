@@ -6,7 +6,7 @@ import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap"
 import * as styles from "@components/VisitHistory/HistoryCardMobile.style";
 import downArrowIcon from "@assets/down-arrow.svg";
 
-import { historyCardProps } from "../../types/HistoryCardProps";
+import { historyCardProps } from "./HistoryCardDesktop";
 
 const HistoryCardMobile = ({
 	url,

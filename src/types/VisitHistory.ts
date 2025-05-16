@@ -1,4 +1,4 @@
-export type visitHistory = {
+export interface visitHistory {
 	// api에서 돌려줄 값
 	historyId: number;
 	rate: number;
@@ -6,4 +6,4 @@ export type visitHistory = {
 	title: string;
 	categoryName: string;
 	roadAddress: string;
-};
+}
