@@ -3,7 +3,7 @@ import { axiosInstance } from "@apis/axiosInstance";
 import { END_POINT } from "@constants/api";
 import { CATEGORY_MAP_REVERSE } from "@constants/category";
 
-import { visitHistory } from "../../types/VisitHistory";
+import type { visitHistory } from "../../types/VisitHistory";
 
 interface historyType {
 	// 날아오는 history 값
