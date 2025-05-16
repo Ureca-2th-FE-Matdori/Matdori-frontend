@@ -21,8 +21,8 @@ const getHistory = async (userId: string | null): Promise<visitHistory[]> => {
 	const historyList: historyType[] = response.data.content;
 
 	// map 함수를 이용해서 content 배열의 각 원소마다 정보를 가공해야 한다
-	const returnValue: visitHistory[] = await Promise.all(
-		historyList.map(async (history: historyType) => {
+	const returnValue: visitHistory[] = historyList.map(
+		(history: historyType) => {
 			const categoryName = CATEGORY_MAP_REVERSE[history.category_id2]; // 카테고리 이름 가져오기
 
 			// 가공된 값 돌려주기
@@ -34,7 +34,7 @@ const getHistory = async (userId: string | null): Promise<visitHistory[]> => {
 				categoryName,
 				roadAddress: history.roadAddress,
 			};
-		})
+		}
 	);
 
 	return returnValue;
