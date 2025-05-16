@@ -25,7 +25,7 @@ const useCurrentPosition = () => {
 					let message = " 위치 정보를 가져올 수 없습니다.";
 					switch (error.code) {
 						case error.PERMISSION_DENIED:
-							message = "위치 접근 권한을 허용해 주세요!";
+							message = "현재 웹브라우저에서 위치기반 설정을 허용해주세요!";
 							break;
 						case error.POSITION_UNAVAILABLE:
 							message = "위치 정보를 사용할 수 없어요.";

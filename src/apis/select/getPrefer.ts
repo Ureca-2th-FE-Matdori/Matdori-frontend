@@ -7,8 +7,7 @@ export const getPrefer = async (
 	latitude: number,
 	longitude: number
 ): Promise<NaverMapResponse> => {
-	const path = END_POINT.PREFER.replace("{userId}", userId);
-	const response = await axiosInstance.get(path, {
+	const response = await axiosInstance.get(END_POINT.PREFER(userId), {
 		params: {
 			latitude,
 			longitude,

@@ -8,6 +8,6 @@ export const END_POINT = {
 	HISTORY: "select/finalize",
 	TOP10: "/ranking/top10",
 	RANDOM: "select/random",
-	PREFER: "select/prefer/{userId}",
-	CATEGORY: "select/{categoryName}",
+	PREFER: (userId: string) => `select/prefer/${userId}`,
+	CATEGORY: (categoryName: string) => `select/${categoryName}`,
 };
