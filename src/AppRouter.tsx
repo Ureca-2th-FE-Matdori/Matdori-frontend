@@ -39,7 +39,7 @@ const AppRouter = () => {
 				},
 				{
 					path: PATH.RESULT,
-					element: <PickupResultPage mode="" />,
+					element: <PickupResultPage />,
 				},
 				{
 					path: PATH.RANKING,
