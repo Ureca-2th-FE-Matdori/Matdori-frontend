@@ -7,4 +7,8 @@ export const END_POINT = {
 	SIGNUP: "users/createAccount",
 	HISTORY: "select/finalize",
 	TOP10: "/ranking/top10",
+	RANDOM: "select/random",
+	PREFER: (userId: string) => `select/prefer/${userId}`,
+	CATEGORY: (categoryName: string) => `select/${categoryName}`,
+	GETHISTORY: "/history",
 };

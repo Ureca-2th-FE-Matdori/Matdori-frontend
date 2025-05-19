@@ -1,148 +1,203 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 import postHistory from "@apis/history/postHistory";
 import fireworks1 from "@assets/json/fireworks1.json";
+import { getCategory } from "@apis/select/getCategory";
+import { getPrefer } from "@apis/select/getPrefer";
+import { getRandom } from "@apis/select/getRandom";
+
 import Button from "@components/common/Button/Button";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import ResultInfoBox from "@components/PickupResultPage/ResultInfoBox";
+
 import Lottie from "lottie-react";
 import { RootState } from "@stores/index";
 import { useIsMobile } from "@stores/IsMobileContext";
+
+import useCurrentPosition from "@hooks/useCurrentPosition";
+import useToast from "@hooks/useToast";
+
+import { CATEGORY_MAP } from "@constants/category";
 import { PATH } from "@constants/path";
+import type { RestaurantItem } from "@type/randomApi";
 import * as styles from "./PickupResultPage.style";
 
-// 추후 mockData 제외 후 api 불러와서 처리
-interface Restaurant {
-	title: string;
-	link: string;
-	category: string;
-	roadAddress: string;
-	mapx: string;
-	mapy: string;
-}
+const PickupResultPage = () => {
+	const [searchParams] = useSearchParams();
+	const modeParam = searchParams.get("mode");
 
-interface pickupPageProps {
-	mode: "RANDOM" | "CATEGORY";
-}
-
-const mockData = [
-	{
-		title: "나나방콕 <b>태국</b>",
-		link: "https://www.instagram.com/nanabangkok_jj",
-		category: "태국음식",
-		roadAddress:
-			"경기도 성남시 분당구 정자일로 121 더샾스타파크 상가동 1층 D동 01, 02호",
-		mapx: "1271058006",
-		mapy: "373611119",
-	},
-	{
-		title: "란반",
-		link: "",
-		category: "한식",
-		roadAddress: "경기도 성남시 분당구 내정로11번길 9 1층",
-		mapx: "1271135646",
-		mapy: "373609919",
-	},
-	{
-		title: "효뜨꽌",
-		link: "https://instagram.com/hieutu_seoul?igshid=pwlezfsllo7l",
-		category: "베트남음식",
-		roadAddress:
-			"경기도 성남시 분당구 정자일로 140 정자역엠코헤리츠 2단지 1층 122호",
-		mapx: "1271067031",
-		mapy: "373626784",
-	},
-	{
-		title: "몬안베띠 정자점",
-		link: "https://www.monanpetit.com/",
-		category: "베트남음식",
-		roadAddress: "경기도 성남시 분당구 정자일로 220 동양정자파라곤 1층 109호",
-		mapx: "1271061591",
-		mapy: "373698487",
-	},
-	{
-		title: "포메인 분당정자본점",
-		link: "http://www.phomein.com/",
-		category: "베트남음식",
-		roadAddress: "경기도 성남시 분당구 정자일로 230 동양정자파라곤 1층 101호",
-		mapx: "1271061119",
-		mapy: "373702564",
-	},
-];
-
-const PickupResultPage = ({ mode }: pickupPageProps) => {
+	const mode = modeParam as "RANDOM" | "PREFER" | keyof typeof CATEGORY_MAP;
 	// 처음 선택한 식당
-	const [selectedRestaurant, setSelectedRestaurant] = useState<Restaurant>(
-		mockData[0]
-	);
-	// 중복으로 나오는 걸 방지 하여 나온 음식점을 제거한 상태저장
-	const [remainingRestaurants, setRemainingRestaurants] =
-		useState<Restaurant[]>(mockData);
+	const [selectedRestaurant, setSelectedRestaurant] =
+		useState<RestaurantItem | null>(null);
+	// 중복으로 나오는 걸 방지 하여 나온 음식점을 제거
+	const restaurantsRef = useRef<RestaurantItem[]>([]);
+	const categoryNameRef = useRef<string>("");
 
 	const isMobile = useIsMobile();
-	const userId = useSelector((state: RootState) => state.user.userId);
+	const userId = useSelector(
+		(state: RootState) => state.rootReducer.user.userId
+	);
 	const nav = useNavigate();
 
-	const lat = parseFloat(selectedRestaurant.mapy) / 1e7;
-	const lng = parseFloat(selectedRestaurant.mapx) / 1e7;
+	const lat = selectedRestaurant
+		? parseFloat(selectedRestaurant.mapy) / 1e7
+		: 0;
+	const lng = selectedRestaurant
+		? parseFloat(selectedRestaurant.mapx) / 1e7
+		: 0;
 
 	const stripHtml = (html: string) => html.replace(/<[^>]+>/g, "");
+	const { makeToast } = useToast();
+	const { getCurrentPosition } = useCurrentPosition();
+
+	// 랜덤 뽑기
+	const pickRandomRestaurant = (items: RestaurantItem[]): RestaurantItem => {
+		return items[Math.floor(Math.random() * items.length)];
+	};
+
+	// 빈배열 랜덤 뽑기 처리
+	const handleApiResponse = (items: RestaurantItem[]) => {
+		if (!items || items.length === 0) {
+			makeToast("Warning", "해당 하는 음식점이 없습니다.");
+			nav(PATH.PICKUP);
+			return;
+		}
+
+		restaurantsRef.current = items;
+		const randomPick = pickRandomRestaurant(items);
+		setSelectedRestaurant(randomPick);
+	};
+
+	// 랜덤 API 호출
+	const fetchRandomRestaurants = async () => {
+		try {
+			const { latitude, longitude } = await getCurrentPosition();
+			console.log("현재 위치:", latitude, longitude);
+			const randomResult = await getRandom(latitude, longitude);
+			console.log("네이버 API 응답 랜덤:", randomResult);
+
+			categoryNameRef.current = randomResult?.categoryName;
+
+			if (
+				!randomResult?.response.items ||
+				randomResult.response.items.length === 0
+			) {
+				// 빈 배열일 때 다시 호출
+				console.warn("빈 배열이 반환되었습니다. 다시 호출합니다.");
+				await fetchRandomRestaurants();
+				return;
+			}
+
+			handleApiResponse(randomResult?.response.items);
+		} catch (error) {
+			console.error("랜덤 API 에러:", error);
+		}
+	};
+
+	// 선호도 API 호출
+	const fetchPreferRestaurants = async () => {
+		if (!userId) return;
+
+		try {
+			const { latitude, longitude } = await getCurrentPosition();
+			console.log("현재 위치:", latitude, longitude);
+
+			const preferResult = await getPrefer(userId, latitude, longitude);
+			console.log("네이버 API 응답 선호도:", preferResult);
+
+			categoryNameRef.current = preferResult?.categoryName;
+
+			handleApiResponse(preferResult?.response.items);
+		} catch (error) {
+			console.error("선호도 API 에러:", error);
+		}
+	};
+
+	const fetchCategoryRestaurants = async () => {
+		try {
+			const { latitude, longitude } = await getCurrentPosition();
+			console.log("현재 위치:", latitude, longitude);
+
+			const categoryResult = await getCategory(mode, latitude, longitude);
+			console.log("네이버 API 응답 카테고리:", categoryResult);
+
+			categoryNameRef.current = categoryResult?.categoryName;
+
+			handleApiResponse(categoryResult?.response.items);
+		} catch (error) {
+			console.error("카테고리 API 에러:", error);
+		}
+	};
+
+	// CATEGORY_MAP 정확한 key 값 지정
+	const isCategoryKey = (key: string): key is keyof typeof CATEGORY_MAP => {
+		return key in CATEGORY_MAP;
+	};
+
+	useEffect(() => {
+		if (mode === "RANDOM") {
+			fetchRandomRestaurants();
+		} else if (mode === "PREFER") {
+			fetchPreferRestaurants();
+		} else if (isCategoryKey(mode)) {
+			fetchCategoryRestaurants();
+		}
+	}, [mode, userId]);
 
 	if (!userId) {
-		console.warn("유저 정보가 없습니다.");
 		return null;
 	}
 
 	const handlePostHistory = async () => {
 		try {
+			if (!selectedRestaurant) return;
 			await postHistory({
 				user: userId,
-				category: selectedRestaurant.category,
+				category: categoryNameRef.current,
 				title: selectedRestaurant.title,
 				link: selectedRestaurant.link,
 				roadAddress: selectedRestaurant.roadAddress,
 			});
-			alert("히스토리 등록을 성공하였습니다.");
+			makeToast("Success", "히스토리 등록을 성공하였습니다.");
 		} catch (error) {
 			console.error("히스토리 등록 실패", error);
-			alert("등록에 실패했습니다.");
+			makeToast("Warning", "등록에 실패했습니다.");
 		}
 	};
+	// RANDOM 모드 재호출
+	const rerollRandomRestaurant = () => {
+		fetchRandomRestaurants();
+	};
 
-	const handleReroll = () => {
-		let candidates: Restaurant[] = [];
+	// CATEGORY 모드 filter로 중복제거
+	const rerollCategoryRestaurant = () => {
+		const filtered = restaurantsRef.current.filter(
+			(item) => item.title !== selectedRestaurant?.title
+		);
 
-		if (remainingRestaurants.length === 0) {
-			alert("근처에 더이상 카테고리에 맞는 음식점이 없습니다.");
+		if (filtered.length === 0) {
+			makeToast("Warning", "근처에 더이상 카테고리에 맞는 음식점이 없습니다.");
 			nav(PATH.PICKUP);
-		}
-
-		if (mode === "RANDOM") {
-			// 랜덤 API에서 새 데이터 받아오기 (현재는 목데이터 유지)
-			candidates = mockData;
-		} else {
-			// CATEGORY 모드
-			candidates = mockData;
-		}
-
-		if (candidates.length === 0) {
-			alert("해당 조건에 맞는 음식점이 없습니다.");
 			return;
 		}
 
-		// remainingRestaurants에서 랜덤으로 음식점 뽑기
-		const newPick =
-			remainingRestaurants[
-				Math.floor(Math.random() * remainingRestaurants.length)
-			];
+		const newPick = pickRandomRestaurant(filtered);
 		setSelectedRestaurant(newPick);
-
-		// 선택된 음식점은 remainingRestaurants에서 제거
-		setRemainingRestaurants((prev) =>
-			prev.filter((resturant) => resturant.title !== newPick.title)
-		);
+		restaurantsRef.current = filtered;
 	};
+
+	const handleReroll = async () => {
+		if (mode === "RANDOM") {
+			rerollRandomRestaurant();
+		} else {
+			rerollCategoryRestaurant();
+		}
+	};
+
+	if (!selectedRestaurant) return null;
 
 	return (
 		<div className={styles.pickupResultWrapper}>
@@ -197,5 +252,4 @@ const PickupResultPage = ({ mode }: pickupPageProps) => {
 		</div>
 	);
 };
-
 export default PickupResultPage;
