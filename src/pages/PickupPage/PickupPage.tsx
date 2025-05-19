@@ -5,12 +5,17 @@ import { PATH } from "@constants/path";
 import favoritePickupJson from "@assets/favoritePickup.json";
 import mapJson from "@assets/map.json";
 import rouletteJson from "@assets/roulette.json";
-import * as styles from "./pickupPage.style";
+import * as styles from "./PickupPage.style";
 
 const PickupPage = () => {
 	// 각자 맞는 페이지로 이동 우선 landingpage로 작성
 	const nav = useNavigate();
 	const isMobile = useIsMobile();
+
+	// url 쿼리 파라미터로 mode값 전달
+	const handleClick = (mode: "RANDOM" | "PREFER") => {
+		nav(`${PATH.RESULT}?mode=${mode}`);
+	};
 
 	return (
 		<div className={styles.pickupWrapper}>
@@ -22,19 +27,19 @@ const PickupPage = () => {
 				<SelectPickupCard
 					title="근처 음식점 무작위 뽑기"
 					animationData={rouletteJson}
-					onClick={() => nav(PATH.ROOT)}
+					onClick={() => handleClick("RANDOM")}
 					buttonlabel="완전 랜덤 뽑기"
 				/>
 				<SelectPickupCard
 					title="15개의 음식점 카테고리 선택"
 					animationData={mapJson}
-					onClick={() => nav(PATH.ROOT)}
+					onClick={() => nav(PATH.LOGIN)}
 					buttonlabel="카테고리별 뽑기"
 				/>
 				<SelectPickupCard
 					title="나의 선호 카테고리 뽑기"
 					animationData={favoritePickupJson}
-					onClick={() => nav(PATH.ROOT)}
+					onClick={() => handleClick("PREFER")}
 					buttonlabel="선호도 뽑기"
 				/>
 			</div>
