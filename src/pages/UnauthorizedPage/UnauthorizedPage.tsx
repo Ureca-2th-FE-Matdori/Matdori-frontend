@@ -1,17 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import MatdoriLogo from "@assets/svg/matdori-logo.svg";
 import Button from "@components/common/Button/Button";
+import { useIsMobile } from "@stores/IsMobileContext";
 import { PATH } from "@constants/path";
 
 const UnauthorizedPage = () => {
 	const navigate = useNavigate();
+	const isMobile = useIsMobile();
 
 	return (
-		<div className="flex justify-center items-center gap-[var(--spacing-100)]">
-			<img className="w-[300px] h-[300px]" src={MatdoriLogo} alt="Logo" />
+		<div
+			className={`flex justify-center items-center gap-[var(--spacing-100)] ${
+				isMobile ? "flex-col px-6 text-center" : "flex-row"
+			}`}>
+			{!isMobile && (
+				<img className="w-[300px] h-[300px]" src={MatdoriLogo} alt="Logo" />
+			)}
 			<div className=" flex justify-center items-center">
 				<div className="flex flex-col gap-[var(--spacing-32)]">
-					<p className="text-heading-h1 text-text-black font-bold">
+					<p
+						className={`${
+							isMobile ? "text-heading-h2" : "text-heading-h1"
+						} text-text-black font-bold`}>
 						잘못된 접근입니다.
 					</p>
 					<div className="flex flex-col gap-[var(--spacing-16)] text-gray-600">
