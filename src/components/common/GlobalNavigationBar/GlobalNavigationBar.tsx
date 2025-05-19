@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PATH } from "@constants/path"; // 경로 관련 상수(PATH) import
 import hamburgerIcon from "@assets/hamburger-icon.svg";
 import matdoriLogo from "@assets/matdori-logo.svg";
@@ -19,8 +19,7 @@ const GlobalNavigationBar = () => {
 		// CSS 클래스를 동적으로 변경해서 열리는 애니메이션과 닫히는 애니메이션을 분기 처리하기 위한 state
 		"opening" | "closing" | null
 	>(null);
-
-	const [nowPageIdx, setNowPageIdx] = useState(-1); // 현재 어느 페이지가 선택되어 있는지 감지하는 state (초기엔 -1)
+	const location = useLocation(); // 현재 location(경로) 정보를 가져 온다
 
 	// isOpen 상태 변화 감지
 	useEffect(() => {
@@ -57,10 +56,10 @@ const GlobalNavigationBar = () => {
 						<Link
 							key={item}
 							to={menuPaths[idx]}
-							className={styles.desktopMenuItem(idx === nowPageIdx)} // 인덱스로 현재 선택된 페이지가 무엇인지 감지
-							onClick={() => {
-								setNowPageIdx(idx);
-							}}>
+							className={styles.desktopMenuItem(
+								location.pathname === menuPaths[idx]
+							)} // 인덱스로 현재 선택된 페이지가 무엇인지 감지
+						>
 							{item}
 						</Link>
 					))}
