@@ -26,7 +26,8 @@ export const expandableInnerContainer =
 	"flex flex-row justify-between items-center px-[4vw] pt-[6vh] pb-[8vh]"; // 데스크탑: 수평 정렬
 
 // 확장 섹션 내부에서 왼쪽 section 관련 디자인 (위치/링크를 표시해 주는 곳)
-export const bottomLeftSide = "flex flex-col justify-center items-start gap-15";
+export const bottomLeftSide =
+	"flex flex-col justify-center items-start gap-15 mr-[4vw]";
 export const textRow = "flex flex-row justify-start items-center"; // 아이콘과 텍스트가 있는 줄 구성
 export const detailText = "text-black text-heading-h6 pl-[2vw]"; // 확장 영역의 왼쪽 부분 세부 내용 글꼴
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
+import getLatLngFromAddress from "@apis/history/getLatLngFromAddress";
 import downArrowIcon from "@assets/svg/down-arrow.svg";
 // import mapPreviewImg from "@assets/png/map-preview.png";
 import matdoriLogo from "@assets/svg/matdori-logo.svg";
 
-import getLatLngFromAddress from "@apis/history/getLatLngFromAddress";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import * as styles from "@components/VisitHistory/HistoryCardDesktop.style";
 
@@ -145,9 +145,12 @@ const HistoryCardDesktop = ({
 									className="w-[44px] h-[44px]"
 									alt="맛도리 로고"
 								/>
-								<span className={styles.detailText}>
+								<a
+									href={url || "#"}
+									className={styles.detailText}
+									style={{ wordBreak: "break-all", display: "block" }}>
 									{url === "" ? "링크 없음" : url}
-								</span>
+								</a>
 							</div>
 						</div>
 

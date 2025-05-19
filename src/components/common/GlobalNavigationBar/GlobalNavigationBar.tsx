@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { PATH } from "@constants/path"; // 경로 관련 상수(PATH) import
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import hamburgerIcon from "@assets/svg/hamburger-icon.svg";
+import homeIcon from "@assets/svg/home-icon.svg";
+import logoutIcon from "@assets/svg/logout-icon.svg";
 import matdoriLogo from "@assets/svg/matdori-logo.svg";
+import { PATH } from "@constants/path"; // 경로 관련 상수(PATH) import
 import * as styles from "./GlobalNavigationBar.style"; // 관련 스타일 내용들 import
 
 const menuItems = ["식당뽑기", "랭킹", "방문내역"]; // menu에 집어 넣을 메뉴명들
@@ -18,6 +20,8 @@ const GlobalNavigationBar = () => {
 		"opening" | "closing" | null
 	>(null);
 	const location = useLocation(); // 현재 location(경로) 정보를 가져 온다
+	const [isLogoPressed, setIsLogoPressed] = useState(false); // 로고(맛도리 로고) 버튼이 눌렸는지에 대한 상태값
+	const navigate = useNavigate();
 
 	// isOpen 상태 변화 감지
 	useEffect(() => {
@@ -42,11 +46,63 @@ const GlobalNavigationBar = () => {
 		};
 	}, [isOpen]);
 
+	const handleLogoutClick = () => {
+		const storeId = sessionStorage.getItem("userId");
+
+		if (storeId) {
+			sessionStorage.removeItem("userId");
+		}
+
+		navigate(PATH.LOGIN);
+	};
+
+	const handlePickupClick = () => {
+		setIsLogoPressed(!setIsLogoPressed);
+		navigate(PATH.PICKUP);
+	};
+
 	return (
 		<>
 			{/* 헤더 */}
 			<div className={styles.headerWrapper}>
-				<img src={matdoriLogo} className={styles.logoStyle} alt="맛도리로고" />
+				{/* 맛도리 로고는 하단에 모달을 띄우기 위한 버튼 역할을 한다 */}
+				<button
+					type="button"
+					className={styles.logoButtonWrapper}
+					onClick={() => {
+						setIsLogoPressed(!isLogoPressed);
+					}}>
+					<img
+						src={matdoriLogo}
+						className={styles.logoStyle}
+						alt="맛도리로고"
+					/>
+				</button>
+
+				{/* 로고 버튼이 눌렸는지의 여부를 감지하여 모달을 띄운다 */}
+				{isLogoPressed && (
+					<div className="absolute top-[11vh] left-[7vw] w-auto h-auto flex flex-col bg-white rounded-button p-3 gap-3 items-start z-2 shadow-md">
+						<button
+							type="button"
+							className="flex flex-row gap-2 justify-start w-full h-[5vh] items-center cursor-pointer rounded-md hover:bg-bg-sub p-4 pr-[var(--spacing-80)]"
+							onClick={handlePickupClick}>
+							<img src={homeIcon} className="w-auto h-full" alt="집 아이콘" />
+							<span className="text-xl">홈</span>
+						</button>
+
+						<button
+							type="button"
+							className="flex flex-row gap-2 justify-start h-[5vh] items-center cursor-pointer rounded-md hover:bg-bg-sub p-4 pr-[var(--spacing-80)]"
+							onClick={handleLogoutClick}>
+							<img
+								src={logoutIcon}
+								className="w-auto h-full"
+								alt="로그아웃 아이콘"
+							/>
+							<span className="text-xl">로그아웃</span>
+						</button>
+					</div>
+				)}
 
 				{/* 데스크탑 메뉴 */}
 				<div className={styles.desktopMenuWrapper}>
