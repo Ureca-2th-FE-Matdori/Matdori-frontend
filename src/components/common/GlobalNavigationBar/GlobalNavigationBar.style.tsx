@@ -4,8 +4,11 @@
 export const headerWrapper =
 	"w-full mx-auto px-[7vw] h-[10vh] flex justify-between items-center py-12 bg-bg-white"; // 양옆 여백 + 중앙 정렬 + 배경색 흰색
 
-// 로고 이미지 스타일
-export const logoStyle = "w-auto h-full"; // 가로 비율 유지, 세로 전체 높이 채우기
+// 로고 이미지 버튼 wrapper
+export const logoButtonWrapper = "w-auto h-full cursor-pointer relative"; // 가로 비율 유지, 세로 전체 높이 채우기
+
+// 로고 이미지 style
+export const logoStyle = "w-auto h-full";
 
 // 데스크탑 메뉴 래퍼 스타일 (768px 이상에서만 보임)
 export const desktopMenuWrapper =
