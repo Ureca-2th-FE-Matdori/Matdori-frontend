@@ -30,6 +30,8 @@ export const bottomLeftSide =
 	"flex flex-col justify-center items-start gap-15 mr-[4vw]";
 export const textRow = "flex flex-row justify-start items-center"; // 아이콘과 텍스트가 있는 줄 구성
 export const detailText = "text-black text-heading-h6 pl-[2vw]"; // 확장 영역의 왼쪽 부분 세부 내용 글꼴
+export const linkText =
+	"text-black text-heading-h6 pl-[2vw] hover:text-text-brand";
 
 // 지도가 들어갈 영역
 export const mapContainer = "w-[40vh] h-[30vh] flex-shrink-0"; // 고정 크기 지도 이미지 컨테이너
