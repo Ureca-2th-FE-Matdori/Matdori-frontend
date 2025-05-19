@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+import { PATH } from "@constants/path"; // 경로 관련 상수(PATH) import
 import hamburgerIcon from "@assets/hamburger-icon.svg";
 import matdoriLogo from "@assets/matdori-logo.svg";
 
 import * as styles from "./GlobalNavigationBar.style"; // 관련 스타일 내용들 import
 
 const menuItems = ["식당뽑기", "랭킹", "방문내역"]; // menu에 집어 넣을 메뉴명들
+const menuPaths = [PATH.PICKUP, PATH.RANKING, PATH.HISTORY]; // 각 페이지의 경로 값들을 저장해 놓은 배열
 const delayClasses = ["delay-100", "delay-300", "delay-500"]; // 0.1s, 0.3s, 0.5s (tailwind v4부터는 사전 정의된 delay 값만 설정 가능)
 const reverseDelayClasses = ["delay-500", "delay-300", "delay-100"]; // 닫힐 때 반대로 애니메이션
 
@@ -48,10 +51,13 @@ const GlobalNavigationBar = () => {
 
 				{/* 데스크탑 메뉴 */}
 				<div className={styles.desktopMenuWrapper}>
-					{menuItems.map((item) => (
-						<a key={item} href={`#${item}`} className={styles.desktopMenuItem}>
+					{menuItems.map((item, idx) => (
+						<Link
+							key={item}
+							to={menuPaths[idx]}
+							className={styles.desktopMenuItem}>
 							{item}
-						</a>
+						</Link>
 					))}
 				</div>
 
