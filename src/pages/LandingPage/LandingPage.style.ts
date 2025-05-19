@@ -22,18 +22,14 @@ export const logoImage = {
 	logo8: "w-[15vw] rotate-[-30deg]",
 };
 
+export const logoImageM = {
+	logo1: "w-[20vh] -translate-x-[40px] -translate-y-[40px] rotate-[-230deg]",
+	logo2: "w-[20vh] -translate-x-[40px] translate-y-[40px] rotate-[45deg]",
+	logo3: "w-[20vh] translate-x-[60px] -translate-y-[60px] rotate-[210deg]",
+	logo4: "w-[20vh] translate-x-[30px] translate-y-[30px] rotate-[-45deg]",
+};
+
 export const leftContainer = "w-2/5 relative";
-
-export const contentContainer = "w-3/5 flex justify-center items-center";
-
-export const motionContainer = "flex flex-col gap-[var(--spacing-20)]";
-
-export const textWrapper = "flex flex-col text-center";
-
-export const logoText =
-	"text-heading-logo text-text-info font-bold leading-[1]";
-
-export const descriptionText = "text-lg text-text-black font-bold";
 
 export const buttonContainer = "flex flex-col p-[var(--spacing-28)]";
 
