@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import postHistory from "@apis/history/postHistory";
-import fireworks1 from "@assets/json/fireworks1.json";
 import { getCategory } from "@apis/select/getCategory";
 import { getPrefer } from "@apis/select/getPrefer";
 import { getRandom } from "@apis/select/getRandom";
+import fireworks1 from "@assets/json/fireworks1.json";
 
 import Button from "@components/common/Button/Button";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
