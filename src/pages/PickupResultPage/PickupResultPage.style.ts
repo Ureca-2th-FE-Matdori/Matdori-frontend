@@ -5,14 +5,20 @@ export const pickupResulLottie = "flex flex-row";
 
 export const pickupResultText = (isMobile: boolean) =>
 	`w-full flex  flex-col justify-center items-center
- ${isMobile ? " text-[25px]" : "text-heading-h4"}`;
+ ${isMobile ? "text-[25px] mb-5" : "w-full text-heading-h4"}`;
 
-export const pickupResulmodal =
-	"bg-bg-secondary w-[70vw] p-10 flex flex-col justify-center items-center rounded-input flex overflow-hidden";
+export const resultLineBreak = (isMobile: boolean) =>
+	isMobile ? "block w-full text-center" : "";
+
+export const pickupResulmodal = (isMobile: boolean) =>
+	`bg-bg-secondary flex flex-col justify-center items-center rounded-input flex overflow-hidden ${isMobile ? "p-5 w-full" : "p-10 w-[70vw]"}`;
 
 export const pickupResultinfo = (isMobile: boolean) =>
-	`flex flex-row gap-10 w-full  h-full mb-[5vh] justify-center items-center
-${isMobile ? "ml-[10vw] ,mb-[2vh] flex-col" : "mb-[5vh]"}`;
+	`flex  w-full mb-[5vh] justify-center items-center
+${isMobile ? "flex-col ,mb-[2vh]" : "flex-row gap-10 mb-[5vh] h-full"}`;
 
-export const pickupResultButton =
-	"flex flex-row justify-around w-full justify-around";
+export const naverMap = (isMobile: boolean) =>
+	`${isMobile ? "w-[250px] h-[200px] my-2" : "w-full h-full"}`;
+
+export const pickupResultButton = (isMobile: boolean) =>
+	`flex flex-row  w-full ${isMobile ? "gap-5  mt-5 justify-center" : "justify-around"}`;

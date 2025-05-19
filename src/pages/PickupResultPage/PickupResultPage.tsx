@@ -206,22 +206,31 @@ const PickupResultPage = () => {
 	return (
 		<div className={styles.pickupResultWrapper}>
 			<div className={styles.pickupResulLottie}>
-				<Lottie
-					loop
-					animationData={fireworks1}
-					style={{ width: 300, height: 180 }}
-				/>
+				{!isMobile && (
+					<Lottie
+						loop
+						animationData={fireworks1}
+						style={{ width: 300, height: 180 }}
+					/>
+				)}
 				<div className={styles.pickupResultText(isMobile)}>
 					<div>맛도리 랜드에서 오늘은</div>
-					<div>[{stripHtml(selectedRestaurant.title)}]에서 맛있는 여행</div>
+					<div>
+						[{stripHtml(selectedRestaurant.title)}]
+						<span className={styles.resultLineBreak(isMobile)}>
+							에서 맛있는 여행
+						</span>
+					</div>
 				</div>
-				<Lottie
-					loop
-					animationData={fireworks1}
-					style={{ width: 300, height: 180 }}
-				/>
+				{!isMobile && (
+					<Lottie
+						loop
+						animationData={fireworks1}
+						style={{ width: 300, height: 180 }}
+					/>
+				)}
 			</div>
-			<div className={styles.pickupResulmodal}>
+			<div className={styles.pickupResulmodal(isMobile)}>
 				<div className={styles.pickupResultinfo(isMobile)}>
 					<div className="flex-1 ">
 						<ResultInfoBox
@@ -254,12 +263,12 @@ const PickupResultPage = () => {
 						/>
 					</div>
 					<div className="flex-1">
-						<div className="w-full h-full">
+						<div className={styles.naverMap(isMobile)}>
 							<NaverDynamicMap lat={lat} lng={lng} />
 						</div>
 					</div>
 				</div>
-				<div className={styles.pickupResultButton}>
+				<div className={styles.pickupResultButton(isMobile)}>
 					<div className="w-[150px]">
 						<Button size="sm" label="다시뽑기" onClick={handleReroll} />
 					</div>
