@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
+import Success from "@assets/svg/success-circle.svg";
+import Warning from "@assets/svg/warning-circle.svg";
 import useToast from "@hooks/useToast";
-import Success from "@assets/success-circle.svg";
-import Warning from "@assets/warning-circle.svg";
 import * as style from "./Toast.style";
 
 export interface ToastProps {

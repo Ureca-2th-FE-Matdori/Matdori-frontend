@@ -7,4 +7,5 @@ export const PATH = {
 	RANKING: "/ranking",
 	PICKUP: "/pickup",
 	RESULT: "/result",
+	CATEGORY: "/category",
 } as const;

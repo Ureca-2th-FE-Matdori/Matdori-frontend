@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 
-import hamburgerIcon from "@assets/hamburger-icon.svg";
-import matdoriLogo from "@assets/matdori-logo.svg";
-
+import hamburgerIcon from "@assets/svg/hamburger-icon.svg";
+import matdoriLogo from "@assets/svg/matdori-logo.svg";
 import * as styles from "./GlobalNavigationBar.style"; // 관련 스타일 내용들 import
 
 const menuItems = ["식당뽑기", "랭킹", "방문내역"]; // menu에 집어 넣을 메뉴명들

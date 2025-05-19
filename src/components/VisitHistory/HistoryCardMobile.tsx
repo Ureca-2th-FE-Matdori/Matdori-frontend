@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-
+import downArrowIcon from "@assets/svg/down-arrow.svg";
 import getLatLngFromAddress from "@apis/history/getLatLngFromAddress";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
-
 import * as styles from "@components/VisitHistory/HistoryCardMobile.style";
-import downArrowIcon from "@assets/down-arrow.svg";
 
 import { historyCardProps } from "./HistoryCardDesktop";
 

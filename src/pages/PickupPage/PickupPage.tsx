@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import favoritePickupJson from "@assets/json/favoritePickup.json";
+import mapJson from "@assets/json/map.json";
+import rouletteJson from "@assets/json/roulette.json";
 import SelectPickupCard from "@components/PickupPage/SelectPickupCard";
 import { useIsMobile } from "@stores/IsMobileContext";
 import { PATH } from "@constants/path";
-import favoritePickupJson from "@assets/favoritePickup.json";
-import mapJson from "@assets/map.json";
-import rouletteJson from "@assets/roulette.json";
 import * as styles from "./PickupPage.style";
 
 const PickupPage = () => {

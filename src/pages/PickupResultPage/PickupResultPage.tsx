@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import postHistory from "@apis/history/postHistory";
+import fireworks1 from "@assets/json/fireworks1.json";
 import { getCategory } from "@apis/select/getCategory";
 import { getPrefer } from "@apis/select/getPrefer";
 import { getRandom } from "@apis/select/getRandom";
@@ -20,7 +21,6 @@ import useToast from "@hooks/useToast";
 
 import { CATEGORY_MAP } from "@constants/category";
 import { PATH } from "@constants/path";
-import fireworks1 from "@assets/fireworks1.json";
 import type { RestaurantItem } from "@type/randomApi";
 import * as styles from "./PickupResultPage.style";
 
