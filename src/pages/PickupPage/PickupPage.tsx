@@ -33,7 +33,7 @@ const PickupPage = () => {
 				<SelectPickupCard
 					title="15개의 음식점 카테고리 선택"
 					animationData={mapJson}
-					onClick={() => nav(PATH.LOGIN)}
+					onClick={() => nav(PATH.CATEGORY)}
 					buttonlabel="카테고리별 뽑기"
 				/>
 				<SelectPickupCard
