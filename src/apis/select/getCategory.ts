@@ -7,8 +7,9 @@ export const getCategory = async (
 	latitude: number,
 	longitude: number
 ): Promise<NaverMapResponse> => {
-	const response = await axiosInstance.get(END_POINT.CATEGORY(categoryName), {
+	const response = await axiosInstance.get(END_POINT.CATEGORY, {
 		params: {
+			selectCategoryName: categoryName,
 			latitude,
 			longitude,
 		},
