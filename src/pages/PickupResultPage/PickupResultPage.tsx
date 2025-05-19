@@ -35,12 +35,13 @@ const PickupResultPage = () => {
 	// 중복으로 나오는 걸 방지 하여 나온 음식점을 제거
 	const restaurantsRef = useRef<RestaurantItem[]>([]);
 	const categoryNameRef = useRef<string>("");
-
 	const isMobile = useIsMobile();
 	const userId = useSelector(
 		(state: RootState) => state.rootReducer.user.userId
 	);
 	const nav = useNavigate();
+	const { makeToast } = useToast();
+	const { getCurrentPosition } = useCurrentPosition();
 
 	const lat = selectedRestaurant
 		? parseFloat(selectedRestaurant.mapy) / 1e7
@@ -50,8 +51,6 @@ const PickupResultPage = () => {
 		: 0;
 
 	const stripHtml = (html: string) => html.replace(/<[^>]+>/g, "");
-	const { makeToast } = useToast();
-	const { getCurrentPosition } = useCurrentPosition();
 
 	// 랜덤 뽑기
 	const pickRandomRestaurant = (items: RestaurantItem[]): RestaurantItem => {
@@ -175,7 +174,7 @@ const PickupResultPage = () => {
 	// CATEGORY 모드 filter로 중복제거
 	const rerollCategoryRestaurant = () => {
 		const filtered = restaurantsRef.current.filter(
-			(item) => item.title !== selectedRestaurant?.title
+			(item) => item.mapx !== selectedRestaurant?.mapx
 		);
 
 		if (filtered.length === 0) {
@@ -232,7 +231,22 @@ const PickupResultPage = () => {
 							label="위치:"
 							value={selectedRestaurant.roadAddress}
 						/>
-						<ResultInfoBox label="링크:" value={selectedRestaurant.link} />
+						<ResultInfoBox
+							label="링크:"
+							value={
+								selectedRestaurant.link ? (
+									<a
+										href={selectedRestaurant.link}
+										target="_blank"
+										rel="noopener noreferrer"
+										style={{ textDecoration: "underline" }}>
+										{selectedRestaurant.link}
+									</a>
+								) : (
+									<span>링크 없음</span>
+								)
+							}
+						/>
 					</div>
 					<div className="flex-1">
 						<div className="w-full h-full">

@@ -2,7 +2,7 @@ import * as styles from "./ResultInfoBox.style";
 
 interface ResultInfoBoxProps {
 	label: string;
-	value: string;
+	value: React.ReactNode;
 }
 
 const ResultInfoBox = ({ label, value }: ResultInfoBoxProps) => {
