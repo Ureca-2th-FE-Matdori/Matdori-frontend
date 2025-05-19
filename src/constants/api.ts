@@ -10,4 +10,5 @@ export const END_POINT = {
 	RANDOM: "select/random",
 	PREFER: (userId: string) => `select/prefer/${userId}`,
 	CATEGORY: (categoryName: string) => `select/${categoryName}`,
+	GETHISTORY: "/history",
 };
