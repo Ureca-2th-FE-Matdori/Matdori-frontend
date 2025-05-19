@@ -35,6 +35,7 @@ const PickupResultPage = () => {
 	// 중복으로 나오는 걸 방지 하여 나온 음식점을 제거
 	const restaurantsRef = useRef<RestaurantItem[]>([]);
 	const categoryNameRef = useRef<string>("");
+	const rerollCountRef = useRef(0);
 	const isMobile = useIsMobile();
 	const userId = useSelector(
 		(state: RootState) => state.rootReducer.user.userId
@@ -52,6 +53,11 @@ const PickupResultPage = () => {
 
 	const stripHtml = (html: string) => html.replace(/<[^>]+>/g, "");
 
+	// CATEGORY_MAP 정확한 key 값 지정
+	const isCategoryKey = (key: string): key is keyof typeof CATEGORY_MAP => {
+		return key in CATEGORY_MAP;
+	};
+
 	// 랜덤 뽑기
 	const pickRandomRestaurant = (items: RestaurantItem[]): RestaurantItem => {
 		return items[Math.floor(Math.random() * items.length)];
@@ -60,8 +66,16 @@ const PickupResultPage = () => {
 	// 빈배열 랜덤 뽑기 처리
 	const handleApiResponse = (items: RestaurantItem[]) => {
 		if (!items || items.length === 0) {
-			makeToast("Warning", "해당 하는 음식점이 없습니다.");
-			nav(PATH.PICKUP);
+			makeToast(
+				"Warning",
+				`주변에 ${categoryNameRef.current} 카테고리를 찾지 못하였습니다.`
+			);
+
+			if (isCategoryKey(mode)) {
+				nav(PATH.CATEGORY);
+			} else {
+				nav(PATH.PICKUP);
+			}
 			return;
 		}
 
@@ -74,10 +88,7 @@ const PickupResultPage = () => {
 	const fetchRandomRestaurants = async () => {
 		try {
 			const { latitude, longitude } = await getCurrentPosition();
-			console.log("현재 위치:", latitude, longitude);
 			const randomResult = await getRandom(latitude, longitude);
-			console.log("네이버 API 응답 랜덤:", randomResult);
-
 			categoryNameRef.current = randomResult?.categoryName;
 
 			if (
@@ -102,11 +113,7 @@ const PickupResultPage = () => {
 
 		try {
 			const { latitude, longitude } = await getCurrentPosition();
-			console.log("현재 위치:", latitude, longitude);
-
 			const preferResult = await getPrefer(userId, latitude, longitude);
-			console.log("네이버 API 응답 선호도:", preferResult);
-
 			categoryNameRef.current = preferResult?.categoryName;
 
 			handleApiResponse(preferResult?.response.items);
@@ -118,22 +125,13 @@ const PickupResultPage = () => {
 	const fetchCategoryRestaurants = async () => {
 		try {
 			const { latitude, longitude } = await getCurrentPosition();
-			console.log("현재 위치:", latitude, longitude);
-
 			const categoryResult = await getCategory(mode, latitude, longitude);
-			console.log("네이버 API 응답 카테고리:", categoryResult);
-
 			categoryNameRef.current = categoryResult?.categoryName;
 
 			handleApiResponse(categoryResult?.response.items);
 		} catch (error) {
 			console.error("카테고리 API 에러:", error);
 		}
-	};
-
-	// CATEGORY_MAP 정확한 key 값 지정
-	const isCategoryKey = (key: string): key is keyof typeof CATEGORY_MAP => {
-		return key in CATEGORY_MAP;
 	};
 
 	useEffect(() => {
@@ -156,11 +154,12 @@ const PickupResultPage = () => {
 			await postHistory({
 				user: userId,
 				category: categoryNameRef.current,
-				title: selectedRestaurant.title,
+				title: stripHtml(selectedRestaurant.title),
 				link: selectedRestaurant.link,
 				roadAddress: selectedRestaurant.roadAddress,
 			});
 			makeToast("Success", "히스토리 등록을 성공하였습니다.");
+			nav(PATH.HISTORY);
 		} catch (error) {
 			console.error("히스토리 등록 실패", error);
 			makeToast("Warning", "등록에 실패했습니다.");
@@ -168,13 +167,19 @@ const PickupResultPage = () => {
 	};
 	// RANDOM 모드 재호출
 	const rerollRandomRestaurant = () => {
+		if (rerollCountRef.current >= 10) {
+			makeToast("Warning", "다시뽑기 10회를 다 사용하였습니다.😭");
+			nav(PATH.PICKUP);
+		}
+
+		rerollCountRef.current += 1;
 		fetchRandomRestaurants();
 	};
 
 	// CATEGORY 모드 filter로 중복제거
 	const rerollCategoryRestaurant = () => {
 		const filtered = restaurantsRef.current.filter(
-			(item) => item.mapx !== selectedRestaurant?.mapx
+			(item) => item.link !== selectedRestaurant?.link
 		);
 
 		if (filtered.length === 0) {
@@ -217,7 +222,7 @@ const PickupResultPage = () => {
 				/>
 			</div>
 			<div className={styles.pickupResulmodal}>
-				<div className={styles.pickupResultinfo}>
+				<div className={styles.pickupResultinfo(isMobile)}>
 					<div className="flex-1 ">
 						<ResultInfoBox
 							label="음식점:"
