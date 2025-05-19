@@ -84,12 +84,13 @@ const GlobalNavigationBar = () => {
 								: reverseDelayClasses[idx] || "delay-100";
 
 						return (
-							<a
+							<Link
 								key={item}
-								href={`#${item}`}
-								className={styles.mobileMenuItem(isOpening, delayClass)}>
+								to={menuPaths[idx]}
+								className={styles.mobileMenuItem(isOpening, delayClass)}
+								onClick={() => setIsOpen(!isOpen)}>
 								{item}
-							</a>
+							</Link>
 						);
 					})}
 				</div>
