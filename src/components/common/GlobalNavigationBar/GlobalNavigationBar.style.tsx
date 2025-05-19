@@ -12,8 +12,10 @@ export const desktopMenuWrapper =
 	"hidden md:flex flex-row items-center gap-100"; // 숨김 처리 후 md 이상에서 수평 정렬 및 간격 조정
 
 // 데스크탑 메뉴 각각의 항목 스타일
-export const desktopMenuItem =
-	"text-black text-heading-h5 hover:text-text-brand"; // 검정 텍스트 + hover 시 브랜드 컬러
+export const desktopMenuItem = (
+	isSelected: boolean // 선택된 버튼일 시엔 text-brand 컬러로 변경 (isSelected로 해당 condition 감지)
+) =>
+	`${isSelected ? "text-text-brand" : "text-black"} text-heading-h5 hover:text-text-brand`; // 검정 텍스트 + hover 시 브랜드 컬러
 
 // 모바일 햄버거 버튼 스타일
 export const mobileButton = "md:hidden focus:outline-none cursor-pointer"; // md 이하에서만 보임 + 포커스 제거 + 커서 변경

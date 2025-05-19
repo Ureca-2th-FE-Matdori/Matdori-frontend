@@ -13,9 +13,12 @@ function App() {
 	const dispatch = useDispatch();
 	const isMobile = useMediaQuery({ query: "(max-width: 767px)" }); // Mobile 화면 여부 확인
 	const location = useLocation();
-	const isNavigationBarVisible = [PATH.PICKUP, PATH.HISTORY, PATH.RESULT].some(
-		(path) => location.pathname.includes(path)
-	);
+	const isNavigationBarVisible = [
+		PATH.PICKUP,
+		PATH.HISTORY,
+		PATH.RESULT,
+		PATH.RANKING,
+	].some((path) => location.pathname.includes(path));
 
 	useEffect(() => {
 		const storeId = sessionStorage.getItem("userId");
