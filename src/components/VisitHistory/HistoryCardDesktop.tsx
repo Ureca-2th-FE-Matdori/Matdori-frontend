@@ -148,7 +148,9 @@ const HistoryCardDesktop = ({
 								<a
 									href={url || "#"}
 									className={styles.detailText}
-									style={{ wordBreak: "break-all", display: "block" }}>
+									style={{ wordBreak: "break-all", display: "block" }}
+									target="_blank"
+									rel="noopener noreferrer">
 									{url === "" ? "링크 없음" : url}
 								</a>
 							</div>
