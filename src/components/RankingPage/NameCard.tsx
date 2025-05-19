@@ -1,5 +1,5 @@
 // "랭킹" 화면에서 사용할 흰색 배너 (이름, 등수, 뱃지가 포함된 배너)
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import firstMedalIcon from "@assets/svg/first-medal.svg";
 import matdoriLogo from "@assets/svg/matdori-logo.svg";
@@ -30,20 +30,31 @@ const NameCard = ({ rank, userId, point, maxPoints, delay }: NameCardProps) => {
 	const isMobile = useIsMobile(); // 현재 화면이 모바일인지 아닌지 확인하는 boolean 값 가져오기
 
 	const [barWidth, setBarWidth] = useState("0%"); // 막대 그래프의 초기 상태는 0%로 초기화
+	const graphWrapperRef = useRef<HTMLDivElement>(null); // graphWrapper를 추적
+	const pointTextRef = useRef<HTMLSpanElement>(null); // pointText span을 추적
 
 	// react에서 제공하는 useLayoutEffect()를 통해 초기상태를 먼저 렌더, 그 다음 프레임에 변경 되도록 설정 가능
 	useLayoutEffect(() => {
-		const ratio = (point / maxPoints) * 100;
+		const wrapperWidth = graphWrapperRef.current?.offsetWidth ?? 0;
+		const pointTextWidth = pointTextRef.current?.offsetWidth ?? 0;
+		const usableWidth = wrapperWidth - pointTextWidth; // 포인트가 표시되는 영역은 제외한 width 값
 
-		// 1. 첫 렌더링 시에 '0px'을 DOM에 그리도록 강제 시킨다
-		setBarWidth("0%");
+		// usableWidth가 유효한 경우
+		if (usableWidth > 0) {
+			const ratio = point / maxPoints;
+			const actualBarWidth = usableWidth * ratio; // usableWidth 기준으로 비율을 매긴다
+			const percentage = (actualBarWidth / wrapperWidth) * 100;
 
-		// 2. 다음 프레임에서 실제 width를 적용한다
-		requestAnimationFrame(() => {
-			setTimeout(() => {
-				setBarWidth(`${ratio}%`);
-			}, delay * 1000); // ms 단위로 지연
-		});
+			// 1. 첫 렌더링 시에 '0px'을 DOM에 그리도록 강제 시킨다
+			setBarWidth("0%");
+
+			// 2. 다음 프레임에서 실제 width를 적용한다
+			requestAnimationFrame(() => {
+				setTimeout(() => {
+					setBarWidth(`${percentage}%`); // point가 표시되는 부분은 제외한 비율 값으로 설정
+				}, delay * 1000); // ms 단위로 지연
+			});
+		}
 	}, [point, maxPoints, delay]);
 
 	return (
@@ -71,7 +82,7 @@ const NameCard = ({ rank, userId, point, maxPoints, delay }: NameCardProps) => {
 
 			{/* 데스크탑 전용 UI, 막대 그래프 */}
 			{!isMobile && (
-				<div className={styles.graphWrapperStyle}>
+				<div className={styles.graphWrapperStyle} ref={graphWrapperRef}>
 					{/* 1. 막대 영역 */}
 					<div
 						className={styles.barStyle}
@@ -82,7 +93,8 @@ const NameCard = ({ rank, userId, point, maxPoints, delay }: NameCardProps) => {
 					/>
 					<span
 						className={styles.pointTextStyle}
-						style={{ animationDelay: `${delay + 0.5}s` }}>
+						style={{ animationDelay: `${delay + 0.5}s` }}
+						ref={pointTextRef}>
 						{point}points
 					</span>
 				</div>
