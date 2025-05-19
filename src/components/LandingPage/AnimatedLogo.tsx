@@ -1,5 +1,5 @@
+import MatdoriLogo from "@assets/svg/matdori-logo.svg";
 import { motion } from "framer-motion";
-import MatdoriLogo from "@assets/matdori-logo.svg";
 
 interface AnimatedLogoProps {
 	className: string;

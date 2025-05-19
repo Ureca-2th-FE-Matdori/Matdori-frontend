@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import downArrowIcon from "@assets/svg/down-arrow.svg";
+// import mapPreviewImg from "@assets/png/map-preview.png";
+import matdoriLogo from "@assets/svg/matdori-logo.svg";
 
 import getLatLngFromAddress from "@apis/history/getLatLngFromAddress";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import * as styles from "@components/VisitHistory/HistoryCardDesktop.style";
-
-import downArrowIcon from "@assets/down-arrow.svg";
-// import mapPreviewImg from "@assets/map-preview.png";
-import matdoriLogo from "@assets/matdori-logo.svg";
 
 export interface historyCardProps {
 	// historyId: number;

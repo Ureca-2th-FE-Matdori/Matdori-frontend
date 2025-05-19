@@ -1,11 +1,11 @@
 // "랭킹" 화면에서 사용할 흰색 배너 (이름, 등수, 뱃지가 포함된 배너)
 import { useLayoutEffect, useState } from "react";
-import { useIsMobile } from "@stores/IsMobileContext"; // isMobile 값을 가져오는 custom Hook (Context API를 통해서..)
 
-import firstMedalIcon from "@assets/first-medal.svg";
-import matdoriLogo from "@assets/matdori-logo.svg";
-import secondMedalIcon from "@assets/second-medal.svg";
-import thirdMedalIcon from "@assets/third-medal.svg";
+import firstMedalIcon from "@assets/svg/first-medal.svg";
+import matdoriLogo from "@assets/svg/matdori-logo.svg";
+import secondMedalIcon from "@assets/svg/second-medal.svg";
+import thirdMedalIcon from "@assets/svg/third-medal.svg";
+import { useIsMobile } from "@stores/IsMobileContext"; // isMobile 값을 가져오는 custom Hook (Context API를 통해서..)
 
 import * as styles from "./NameCard.style";
 
