@@ -147,10 +147,15 @@ const HistoryCardDesktop = ({
 								/>
 								<a
 									href={url || "#"}
-									className={styles.detailText}
+									className={styles.linkText}
 									style={{ wordBreak: "break-all", display: "block" }}
 									target="_blank"
-									rel="noopener noreferrer">
+									rel="noopener noreferrer"
+									onClick={(e) => {
+										if (url === "") {
+											e.preventDefault(); // url이 비어있는 경우, 클릭해도 아무 동작 안 하도록 방지
+										}
+									}}>
 									{url === "" ? "링크 없음" : url}
 								</a>
 							</div>

@@ -232,7 +232,7 @@ const PickupResultPage = () => {
 			</div>
 			<div className={styles.pickupResulmodal(isMobile)}>
 				<div className={styles.pickupResultinfo(isMobile)}>
-					<div className="flex-1 ">
+					<div className="flex-1 w-full">
 						<ResultInfoBox
 							label="음식점:"
 							value={stripHtml(selectedRestaurant.title)}
@@ -262,7 +262,7 @@ const PickupResultPage = () => {
 							}
 						/>
 					</div>
-					<div className="flex-1">
+					<div className="flex-1 w-full">
 						<div className={styles.naverMap(isMobile)}>
 							<NaverDynamicMap lat={lat} lng={lng} />
 						</div>

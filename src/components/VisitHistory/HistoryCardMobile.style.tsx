@@ -29,6 +29,7 @@ export const expandableInnerContainer =
 export const detailBlock = "flex flex-col gap-1";
 export const titleText = "text-black text-body-lg text-bold";
 export const detailText = "text-black text-body-sm";
+export const linkText = "text-black text-body-sm hover:text-text-brand";
 
 // 지도
 export const mapContainer = "w-full h-[30vh] flex-shrink-0";

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import downArrowIcon from "@assets/svg/down-arrow.svg";
 import getLatLngFromAddress from "@apis/history/getLatLngFromAddress";
+import downArrowIcon from "@assets/svg/down-arrow.svg";
 import NaverDynamicMap from "@components/common/NaverDynamicMap/NaverDynamicMap";
 import * as styles from "@components/VisitHistory/HistoryCardMobile.style";
 
@@ -119,9 +119,19 @@ const HistoryCardMobile = ({
 						{/* "링크" 정보 표시하는 block */}
 						<div className={styles.detailBlock}>
 							<span className={styles.titleText}>링크:</span>
-							<span className={styles.detailText}>
+							<a
+								href={url || "#"}
+								className={styles.linkText}
+								style={{ wordBreak: "break-all", display: "block" }}
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={(e) => {
+									if (url === "") {
+										e.preventDefault(); // url이 비어있는 경우, 클릭해도 아무 동작 안 하도록 방지
+									}
+								}}>
 								{url === "" ? "링크 없음" : url}
-							</span>
+							</a>
 						</div>
 
 						{/* 네이버 지도 API를 갖고 와서 embed, 지도는 조건부 렌더링 */}

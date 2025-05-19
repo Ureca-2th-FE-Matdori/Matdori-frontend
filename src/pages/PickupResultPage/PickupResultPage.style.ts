@@ -4,7 +4,7 @@ export const pickupResultWrapper =
 export const pickupResulLottie = "flex flex-row";
 
 export const pickupResultText = (isMobile: boolean) =>
-	`w-full flex  flex-col justify-center items-center
+	`w-full flex flex-col justify-center items-center
  ${isMobile ? "text-[25px] mb-5" : "w-full text-heading-h4"}`;
 
 export const resultLineBreak = (isMobile: boolean) =>
@@ -18,7 +18,7 @@ export const pickupResultinfo = (isMobile: boolean) =>
 ${isMobile ? "flex-col ,mb-[2vh]" : "flex-row gap-10 mb-[5vh] h-full"}`;
 
 export const naverMap = (isMobile: boolean) =>
-	`${isMobile ? "w-[250px] h-[200px] my-2" : "w-full h-full"}`;
+	`${isMobile ? "w-full h-auto" : "w-full h-full"}`;
 
 export const pickupResultButton = (isMobile: boolean) =>
-	`flex flex-row  w-full ${isMobile ? "gap-5  mt-5 justify-center" : "justify-around"}`;
+	`flex flex-row  w-full ${isMobile ? "gap-5 justify-center" : "justify-around"}`;
