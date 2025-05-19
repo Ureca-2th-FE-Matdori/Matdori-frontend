@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
+import favoritePickupJson from "@assets/json/favoritePickup.json";
+import mapJson from "@assets/json/map.json";
+import rouletteJson from "@assets/json/roulette.json";
 import SelectPickupCard from "@components/PickupPage/SelectPickupCard";
 import { useIsMobile } from "@stores/IsMobileContext";
 import { PATH } from "@constants/path";
-import favoritePickupJson from "@assets/favoritePickup.json";
-import mapJson from "@assets/map.json";
-import rouletteJson from "@assets/roulette.json";
 import * as styles from "./PickupPage.style";
 
 const PickupPage = () => {
@@ -33,7 +33,7 @@ const PickupPage = () => {
 				<SelectPickupCard
 					title="15개의 음식점 카테고리 선택"
 					animationData={mapJson}
-					onClick={() => nav(PATH.LOGIN)}
+					onClick={() => nav(PATH.CATEGORY)}
 					buttonlabel="카테고리별 뽑기"
 				/>
 				<SelectPickupCard
