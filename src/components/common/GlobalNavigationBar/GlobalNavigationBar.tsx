@@ -20,6 +20,8 @@ const GlobalNavigationBar = () => {
 		"opening" | "closing" | null
 	>(null);
 
+	const [nowPageIdx, setNowPageIdx] = useState(-1); // 현재 어느 페이지가 선택되어 있는지 감지하는 state (초기엔 -1)
+
 	// isOpen 상태 변화 감지
 	useEffect(() => {
 		let openingTimer: NodeJS.Timeout; // 비동기 타이머는 컴포넌트가 사라질 때 정리 필요 -> 변수로 선언해 놓고, 나중에 clear!
@@ -55,7 +57,10 @@ const GlobalNavigationBar = () => {
 						<Link
 							key={item}
 							to={menuPaths[idx]}
-							className={styles.desktopMenuItem}>
+							className={styles.desktopMenuItem(idx === nowPageIdx)} // 인덱스로 현재 선택된 페이지가 무엇인지 감지
+							onClick={() => {
+								setNowPageIdx(idx);
+							}}>
 							{item}
 						</Link>
 					))}
