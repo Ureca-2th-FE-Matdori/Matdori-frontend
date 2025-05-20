@@ -1,29 +1,51 @@
 {
-  "name": "matdori-frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@eslint/js": "^9.22.0",
-    "@types/react": "^19.0.10",
-    "@types/react-dom": "^19.0.4",
-    "@vitejs/plugin-react-swc": "^3.8.0",
-    "eslint": "^9.22.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^16.0.0",
-    "typescript": "~5.7.2",
-    "typescript-eslint": "^8.26.1",
-    "vite": "^6.3.1"
-  }
+	"name": "matdori-frontend",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"lint": "eslint .",
+		"preview": "vite preview",
+		"prepare": "husky"
+	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^2.7.0",
+		"@tailwindcss/vite": "^4.1.5",
+		"@vitejs/plugin-react-swc": "^3.8.0",
+		"axios": "^1.9.0",
+		"framer-motion": "^12.10.5",
+		"lottie-react": "^2.4.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-redux": "^9.2.0",
+		"react-responsive": "^10.0.1",
+		"react-router-dom": "^7.5.3",
+		"tailwindcss": "^4.1.5",
+		"vite": "^6.3.1",
+		"vite-tsconfig-paths": "^5.1.4"
+	},
+	"devDependencies": {
+		"@commitlint/cli": "^19.8.0",
+		"@commitlint/config-conventional": "^19.8.0",
+		"@types/navermaps": "^3.7.9",
+		"@types/react": "^19.0.10",
+		"@types/react-dom": "^19.0.4",
+		"@typescript-eslint/eslint-plugin": "^7.6.0",
+		"@typescript-eslint/parser": "^7.6.0",
+		"eslint": "^8.57.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-plugin-jsx-a11y": "^6.8.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"eslint-plugin-react": "^7.34.1",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-react-refresh": "^0.4.6",
+		"globals": "^16.0.0",
+		"husky": "^9.1.7",
+		"prettier": "^3.5.3",
+		"typescript": "~5.7.2"
+	}
 }
